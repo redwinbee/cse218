@@ -1,5 +1,7 @@
 package p1;
 
+import java.util.StringJoiner;
+
 public class Author {
     private String firstName;
     private String lastName;
@@ -23,5 +25,13 @@ public class Author {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Author.class.getSimpleName() + "[", "]")
+                .add("firstName='" + firstName + "'")
+                .add("lastName='" + lastName + "'")
+                .toString();
     }
 }

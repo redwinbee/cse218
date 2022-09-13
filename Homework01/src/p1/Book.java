@@ -1,5 +1,7 @@
 package p1;
 
+import java.util.StringJoiner;
+
 public class Book {
     private static int isbnCounter;
     private final String isbn;
@@ -40,5 +42,15 @@ public class Book {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Book.class.getSimpleName() + "[", "]")
+                .add("isbn='" + isbn + "'")
+                .add("title='" + title + "'")
+                .add("author=" + author)
+                .add("price=" + price)
+                .toString();
     }
 }

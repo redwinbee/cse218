@@ -19,6 +19,45 @@ public class BookBag {
         arr[elements++] = book;
     }
 
+    public Book deleteByIsbn(String isbn) {
+        int i;
+        for (i = 0; i < elements; i++) {
+            if (arr[i].getIsbn().equals(isbn)) {
+                break;
+            }
+        }
+
+        if (i == elements) {
+            return null;
+        } else {
+            Book temp = arr[i];
+            for (int j = 0; j < elements - 1; j++) {
+                arr[j] = arr[j + 1];
+            }
+
+            elements--;
+            return temp;
+        }
+    }
+
+    public Book[] deleteByLastName(String lastName) {
+        Book[] matches = new Book[elements];
+        int count = 0;
+        for (int i = 0; i < elements; i++) {
+            if (arr[i].getAuthor().getLastName().equals(lastName)) {
+                matches[count++] = arr[i];
+                for (int j = i; j < elements - 1; j++) {
+                    arr[j] = arr[j + 1];
+                }
+
+                elements--;
+                i--;
+            }
+        }
+
+        return Arrays.copyOf(matches, count);
+    }
+
     public void display() {
         for (int i = 0; i < elements; i++) {
             System.out.printf("[%d]: %s%n", i, arr[i]);
@@ -65,7 +104,44 @@ public class BookBag {
     }
 
     public void bubbleSortByIsbn() {
+        int out;
+        int in;
+        for (out = elements - 1; out >= 1; out--) {
+            for (in = 0; in < out; in++) {
+                if (Integer.parseInt(arr[in].getIsbn()) > Integer.parseInt(arr[in + 1].getIsbn())) {
+                    swap(in, in + 1);
+                }
+            }
+        }
+    }
 
+    public void insertionSortByLastName() {
+        int in;
+        int out;
+        for (out = 1; out < elements; out++) {
+            Book temp = arr[out];
+            in = out;
+            while (in > 0 && arr[in - 1].getAuthor().getLastName().compareTo(temp.getAuthor().getLastName()) > 0) {
+                arr[in] = arr[in - 1];
+                in--;
+            }
+            arr[in] = temp;
+        }
+    }
+
+    public void selectionSortByPrice() {
+        int out;
+        int in;
+        int min;
+        for (out = 0; out < elements - 1; out++) {
+            min = out;
+            for (in = out + 1; in < elements; in++) {
+                if (arr[in].getPrice() < arr[min].getPrice()) {
+                    min = in;
+                }
+            }
+            swap(out, min);
+        }
     }
 
     private Book[] resize() {
