@@ -1,0 +1,24 @@
+1) for insertions into an array, the time complexity would be O(1) since the amount
+of time required to add an item into the array doesn't depend on the number of
+elements in the array.
+
+2) deletion has a time complexity of O(n) in the average case since deleting an item
+in the array requires a shift of, at max, n-elements to the left to avoid holes in
+the data set.
+
+3) deleting multiple items from an array can take up to O(n^2) time since for each
+made, the array needs to be shifted like in the regular deletion. n^2 because the
+deletion time is multiplied by at most n-elements: n(O(n)) or O(n^2)
+
+4) sequential searching takes at most O(n) time since it simply requires going
+through an array linearly.
+
+5) binary searching has an average runtime of O(log(n)) since the time required to
+searching using this method is very insensitive to the number of elements in the array.
+ the time required as the number of elements increases behaves much like f(x)=log(x).
+
+6) bubble, insertion, and selection sort all require an average of O(n^2) since all methods
+require a second loop inside the first to perform the sorting. In general, looping over an
+entire list inside another loop over the list takes O(n^2) time on average. However, in the
+case of insertion sort, the time complexity could be at best O(n) time if the array is at least
+partially sorted.
