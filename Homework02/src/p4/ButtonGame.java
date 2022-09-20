@@ -57,8 +57,11 @@ public class ButtonGame extends Application {
     }
 
     private void onClick(Button button) {
+        if (button.getStyle().contains("-fx-background-color: #ff0000")) {
+            System.out.println("skipping");
+            return;
+        }
         button.setStyle("-fx-background-color: #ff0000; ");
-        button.setDisable(true);
         buttonStack.push(button);
     }
 
@@ -78,6 +81,5 @@ public class ButtonGame extends Application {
         }
         Button undone = buttonStack.pop();
         undone.setStyle("-fx-background-color: #000000; ");
-        undone.setDisable(false);
     }
 }
