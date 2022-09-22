@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Lecture03_Queues_PriorityQ.iml" filepath="$PROJECT_DIR$/Lecture03_Queues_PriorityQ.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lecture03_Queues.iml" filepath="$PROJECT_DIR$/Lecture03_Queues.iml" />
     </modules>
   </component>
 </project>
