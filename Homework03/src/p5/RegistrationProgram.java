@@ -50,6 +50,7 @@ public class RegistrationProgram extends Application {
         HBox buttonBox = new HBox(15);
         buttonBox.setAlignment(Pos.CENTER);
         Button signInBtn = new Button("Sign In");
+        signInBtn.setDefaultButton(true);
         Label successLabel = new Label();
         signInBtn.setOnAction(event -> {
             boolean successful = onSignIn(userNameField.getText(), passwordField.getText());
@@ -85,6 +86,7 @@ public class RegistrationProgram extends Application {
         HBox buttonBox = new HBox(15);
         buttonBox.setAlignment(Pos.CENTER);
         Button createButton = new Button("Create");
+        createButton.setDefaultButton(true);
         Label successLabel = new Label();
         createButton.setOnAction(event -> {
             boolean successful = onClickCreate(emailField.getText(), userNameField.getText(), passwordField.getText());
