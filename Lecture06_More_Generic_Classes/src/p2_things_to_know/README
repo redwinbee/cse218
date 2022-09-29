@@ -1,0 +1,9 @@
+1) An array cannot be created from generic types
+
+2) You cannot create objects using a generic type
+
+3) Generic types cannot be used in static contexts
+
+4) An exception class cannot be of generic type
+
+5) Erasure occurs at compile-time. Therefore, the use of generics has no effect on runtime performance.
