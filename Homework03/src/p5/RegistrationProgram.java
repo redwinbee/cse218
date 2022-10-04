@@ -13,15 +13,23 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import p5.model.Account;
+import p5.persistence.Storage;
 
 import java.util.ArrayList;
 
 public class RegistrationProgram extends Application {
-    private final ArrayList<Account> accounts = new ArrayList<>();
+    private ArrayList<Account> accounts = new ArrayList<>();
     private BorderPane root;
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void init() throws Exception {
+        if (Storage.ACCOUNTS_FILE.exists()) {
+            accounts = Storage.restore();
+        }
     }
 
     @Override
@@ -30,6 +38,7 @@ public class RegistrationProgram extends Application {
         root.setCenter(signInView());
         root.setPadding(new Insets(10, 10, 10, 10));
 
+        primaryStage.setOnCloseRequest(event -> Storage.backup(accounts));
         primaryStage.setScene(new Scene(root, 300, 350));
         primaryStage.setTitle("Registration Program");
         primaryStage.show();

@@ -1,8 +1,9 @@
 package p5.model;
 
+import java.io.Serializable;
 import java.util.StringJoiner;
 
-public class Account {
+public class Account implements Serializable {
     private String email;
     private String username;
     private String password;
