@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-public class GStack<E> {
+public class GStack<E extends Number> {
     private final E[] array;
     private final int maxSize;
     private int top;
