@@ -4,10 +4,12 @@ import java.util.StringJoiner;
 
 public class Link {
     private int data;
+    private Book book;
     private Link next;
 
-    public Link(int data) {
+    public Link(int data, Book book) {
         this.data = data;
+        this.book = book;
         this.next = null;
     }
 
@@ -27,10 +29,19 @@ public class Link {
         this.next = next;
     }
 
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Link.class.getSimpleName() + "[", "]")
                 .add("data=" + data)
+                .add("book=" + book)
                 .toString();
     }
 }
