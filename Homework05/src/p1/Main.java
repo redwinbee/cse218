@@ -1,18 +1,35 @@
 package p1;
 
-import java.io.File;
-import java.util.List;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class Main {
+import java.io.File;
+
+public class Main extends Application {
     private static final File TEXT_FILE = new File("data/blowingInTheWind.txt");
+    private VBox container;
 
     public static void main(String[] args) {
-        Parser parser = new Parser(TEXT_FILE);
+        launch(args);
     }
 
-    private static void display(List<String> list) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.printf("[%d]: %s%n", i, list.get(i));
-        }
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        buildStage();
+
+        primaryStage.setScene(new Scene(container));
+        primaryStage.setTitle("Homework05");
+        primaryStage.show();
+    }
+
+    private void buildStage() {
+        container = new VBox();
+        container.setAlignment(Pos.CENTER);
+        container.setSpacing(10);
+        container.setPadding(new Insets(10, 10, 10, 10));
     }
 }
