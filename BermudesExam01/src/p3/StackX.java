@@ -1,23 +1,21 @@
 package p3;
 
-import java.util.LinkedList;
-
-public class StackX<E> {
-    private final LinkedList<E> stack;
+public class StackX<T> {
+    private final SimpleLinkedList<T> list;
 
     public StackX() {
-        this.stack = new LinkedList<>();
+        this.list = new SimpleLinkedList<>();
     }
 
     public boolean isEmpty() {
-        return stack.isEmpty();
+        return list.isEmpty();
     }
 
-    public void push(E value) {
-        stack.push(value);
+    public void push(T value) {
+        list.add(value);
     }
 
-    public E pop() {
-        return stack.pop();
+    public T pop() {
+        return list.remove();
     }
 }

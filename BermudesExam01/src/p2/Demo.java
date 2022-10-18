@@ -10,7 +10,10 @@ public class Demo {
 
         queue.display();
 
-        Book removed = queue.remove();
-        System.out.println("removed: " + removed);
+        int count = 0;
+        while (!queue.isEmpty()) {
+            Book removed = queue.remove();
+            System.out.printf("[%d]: removed: %s%n", count++, removed);
+        }
     }
 }
