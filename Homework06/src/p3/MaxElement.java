@@ -6,9 +6,14 @@ public class MaxElement {
 
     public static void main(String[] args) {
         int[] array = getRandomIntArray();
-        int maxValue = getMaxElement(array, -1, 0);
+        int maxValue = getMaxElement(array);
         display(array);
         System.out.printf("[result]: max value of array is %d%n", maxValue);
+    }
+
+    private static int getMaxElement(int[] array) {
+        // just makes calling this method a bit cleaner
+        return getMaxElement(array, -1, 0);
     }
 
     private static int getMaxElement(int[] array, int currentMax, int idx) {
