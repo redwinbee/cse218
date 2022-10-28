@@ -1,7 +1,7 @@
 package p1;
 
 public class MemberSearch {
-    private static final int MAX_ELEMENTS = 10;
+    private static final int MAX_ELEMENTS = 100;
     private static final int UPPER_LIMIT = 10;
 
     public static void main(String[] args) {
