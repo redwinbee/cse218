@@ -58,6 +58,10 @@ public class MergeSortArray {
         array[elements++] = value;
     }
 
+    public int size() {
+        return elements;
+    }
+
     public void display() {
         for (int i = 0; i < elements; i++) {
             System.out.print(array[i] + " ");
