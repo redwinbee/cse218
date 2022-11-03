@@ -3,8 +3,8 @@ package p2_mergesort;
 import java.util.Arrays;
 
 public class Demo {
-    private static final int ITERATIONS = 10;
-    private static final int MAX_ELEMENTS = 10_000_000;
+    private static final int ITERATIONS = 100;
+    private static final int MAX_ELEMENTS = 1_000_000;
     private static final double[] RUNTIMES = new double[ITERATIONS];
     private static int counter = 0;
 
@@ -14,10 +14,11 @@ public class Demo {
             runBenchmark();
         }
 
-        double avgRuntime = Arrays.stream(RUNTIMES).sum() / 1_000_000.0;
+        double avgRuntime = Arrays.stream(RUNTIMES).sum() / RUNTIMES.length;
         System.out.printf("[results]: average runtime of %.2f over %d iteration(s)%n", avgRuntime, ITERATIONS);
     }
 
+    @SuppressWarnings("all")
     private static void runBenchmark() {
         MergeSortArray array1 = new MergeSortArray(MAX_ELEMENTS);
         int[] array2 = new int[MAX_ELEMENTS];
