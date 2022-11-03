@@ -3,9 +3,22 @@ package p2_mergesort;
 import java.util.Arrays;
 
 public class Demo {
-    private static final int MAX_ELEMENTS = 1_000_000;
+    private static final int ITERATIONS = 10;
+    private static final int MAX_ELEMENTS = 10_000_000;
+    private static final double[] RUNTIMES = new double[ITERATIONS];
+    private static int counter = 0;
 
     public static void main(String[] args) {
+        for (int i = 0; i < ITERATIONS; i++) {
+            System.out.printf("[bench::%d]: running...%n", i);
+            runBenchmark();
+        }
+
+        double avgRuntime = Arrays.stream(RUNTIMES).sum() / 1_000_000.0;
+        System.out.printf("[results]: average runtime of %.2f over %d iteration(s)%n", avgRuntime, ITERATIONS);
+    }
+
+    private static void runBenchmark() {
         MergeSortArray array1 = new MergeSortArray(MAX_ELEMENTS);
         int[] array2 = new int[MAX_ELEMENTS];
         for (int i = 0; i < MAX_ELEMENTS; i++) {
@@ -24,11 +37,6 @@ public class Demo {
         Arrays.sort(array2);
         long endTime2 = System.nanoTime();
 
-
-        System.out.println("array1 size: " + array1.size());
-        System.out.println("array2 size: " + array2.length);
-        System.out.printf("[runtime::array1]: %fms%n", (endTime - startTime) / 1_000_000.0);
-        System.out.printf("[runtime::array2]: %fms%n", (endTime2 - startTime2) / 1_000_000.0);
-
+        RUNTIMES[counter++] = (endTime - startTime) / 1_000_000.0;
     }
 }
