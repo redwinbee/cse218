@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="post" onMouseClicked="#onClickPost" prefHeight="134.0"
+            prefWidth="524.0" xmlns="http://javafx.com/javafx/19"
+            fx:controller="controller.home.PostController">
+    <children>
+        <TilePane layoutX="14.0" layoutY="14.0" orientation="VERTICAL" prefHeight="128.0" prefWidth="398.0"
+                  tileAlignment="TOP_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label fx:id="name" text="firstName lastName">
+                    <font>
+                        <Font name="System Bold" size="15.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="userName" text="\@username" textFill="#949494"/>
+            </children>
+            <padding>
+                <Insets left="5.0" top="5.0"/>
+            </padding>
+        </TilePane>
+        <Label fx:id="body" layoutX="7.0" layoutY="39.0" prefHeight="89.0" prefWidth="509.0"
+               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum sed arcu non odio euismod. Magna ac placerat vestibulum lectus mauris ultrices eros. Faucibus interdum posuere lorem ipsum dolor sit amet. Non odio euismod lacinia at quis risus sed vulputate. In massa tempor nec feugiat nisl pretium fusce. Eget lorem dolor sed viverra. Aliquet sagittis id consectetur purus ut. Viverra ipsum nunc aliquet bibendum. Sit amet consectetur adipiscing elit pellentesque habitant morbi tristique."
+               wrapText="true"/>
+    </children>
+    <padding>
+        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>
+    </padding>
+    <cursor>
+        <Cursor fx:constant="HAND"/>
+    </cursor>
+</AnchorPane>
