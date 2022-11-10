@@ -4,6 +4,7 @@ import app.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -14,7 +15,9 @@ import java.io.IOException;
 public class HomeController {
     private static Account account;
     @FXML
-    private VBox postsBox;
+    private ScrollPane postsPane;
+    @FXML
+    private VBox posts;
     @FXML
     private TextArea postArea;
     @FXML
@@ -29,7 +32,9 @@ public class HomeController {
         try {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("../view/home/post.fxml"));
             AnchorPane pane = loader.load();
-            postsBox.getChildren().add(pane);
+            PostController controller = loader.getController();
+            controller.initData(account, postArea);
+            posts.getChildren().add(pane);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
