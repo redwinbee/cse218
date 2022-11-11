@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="controller.Register">
+    <children>
+        <VBox alignment="CENTER" fillWidth="false" spacing="10.0">
+            <children>
+                <TextField fx:id="firstNameField" promptText="first name">
+                    <font>
+                        <Font name="Rockwell" size="13.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="lastNameField" promptText="last name">
+                    <font>
+                        <Font name="Rockwell" size="13.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="emailField" promptText="email">
+                    <font>
+                        <Font name="Rockwell" size="13.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="userNameField" promptText="username">
+                    <font>
+                        <Font name="Rockwell" size="13.0"/>
+                    </font>
+                </TextField>
+                <PasswordField fx:id="passwordField" promptText="password">
+                    <font>
+                        <Font name="Rockwell" size="13.0"/>
+                    </font>
+                </PasswordField>
+                <HBox spacing="10.0">
+                    <children>
+                        <Button fx:id="registerButton" defaultButton="true" mnemonicParsing="false"
+                                onAction="#handleRegister" text="Register">
+                            <font>
+                                <Font name="Rockwell" size="13.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBack" text="Back">
+                            <font>
+                                <Font name="Rockwell" size="13.0"/>
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+                <Label fx:id="statusLabel">
+                    <font>
+                        <Font name="Rockwell" size="11.0"/>
+                    </font>
+                </Label>
+            </children>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <padding>
+                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

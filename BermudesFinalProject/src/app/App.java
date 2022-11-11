@@ -8,31 +8,47 @@ import javafx.stage.Stage;
 import persistence.AccountsManager;
 import persistence.Storage;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.TreeSet;
 
 public class App extends Application {
+    private static Stage primaryStage;
     private static AccountsManager accountsManager;
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    @Override
-    public void init() throws Exception {
-        accountsManager = Storage.ACCOUNTS_FILE.exists() ? Storage.restore() : new AccountsManager(new TreeSet<>());
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxml/login.fxml")));
-        primaryStage.setOnCloseRequest(event -> Storage.backup(accountsManager));
-        primaryStage.setTitle("BermudesFinalProject");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+    public static void changeView(String resource) {
+        try {
+            Parent parent = FXMLLoader.load(Objects.requireNonNull(App.class.getResource(resource)));
+            primaryStage.setScene(new Scene(parent));
+        } catch (IOException ex) {
+            // this is fatal
+            ex.printStackTrace();
+        }
     }
 
     public static AccountsManager getAccountsManager() {
         return accountsManager;
+    }
+
+
+    @Override
+    public void init() throws Exception {
+        accountsManager = Storage.ACCOUNTS_FILE.exists() ? Storage.restore() : new AccountsManager(new TreeSet<>());
+        Objects.requireNonNull(accountsManager).display();
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxml/login.fxml")));
+        stage.setOnCloseRequest(event -> Storage.backup(accountsManager));
+        stage.setTitle("BermudesFinalProject");
+        stage.setScene(new Scene(root));
+        stage.show();
+
+        primaryStage = stage;
     }
 }
