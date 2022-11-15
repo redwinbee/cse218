@@ -1,6 +1,7 @@
 package persistence;
 
 import model.Account;
+import model.Name;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -31,6 +32,16 @@ public class AccountsManager {
     public boolean exists(String userName, String email) {
         return accounts.stream().anyMatch(acc ->
                 acc.getUserName().equals(userName) || acc.getEmail().equals(email));
+    }
+
+    public Optional<Account> create(Name name, String userName, String email, String password) {
+        if (exists(userName, email)) {
+            return Optional.empty();
+        } else {
+            Account account = new Account(name, userName, email, password);
+            add(account);
+            return Optional.of(account);
+        }
     }
 
     public void add(Account account) {
