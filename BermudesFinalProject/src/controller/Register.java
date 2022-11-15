@@ -12,13 +12,14 @@ import javafx.scene.paint.Color;
 import model.Account;
 import model.Name;
 import net.synedra.validatorfx.Validator;
+import util.ViewFinder;
 
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Register implements Initializable {
-    private Validator validator = new Validator();
+    private final Validator validator = new Validator();
     @FXML
     private TextField firstNameField;
     @FXML
@@ -90,7 +91,7 @@ public class Register implements Initializable {
 
     @FXML
     public void handleBack(ActionEvent actionEvent) {
-        App.changeView("../fxml/login.fxml");
+        App.changeView(ViewFinder.get("login"));
     }
 
     private boolean fieldsEmpty() {

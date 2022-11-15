@@ -7,8 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import persistence.AccountsManager;
 import persistence.Storage;
+import util.ViewFinder;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.TreeSet;
 
@@ -20,9 +22,9 @@ public class App extends Application {
         launch(args);
     }
 
-    public static void changeView(String resource) {
+    public static void changeView(URL resource) {
         try {
-            Parent parent = FXMLLoader.load(Objects.requireNonNull(App.class.getResource(resource)));
+            Parent parent = FXMLLoader.load(resource);
             primaryStage.setScene(new Scene(parent));
         } catch (IOException ex) {
             // this is fatal
@@ -43,7 +45,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxml/login.fxml")));
+        Parent root = FXMLLoader.load(ViewFinder.get("login"));
         stage.setOnCloseRequest(event -> Storage.backup(accountsManager));
         stage.setTitle("BermudesFinalProject");
         stage.setScene(new Scene(root));

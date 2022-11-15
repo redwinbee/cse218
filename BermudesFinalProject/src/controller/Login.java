@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import util.ViewFinder;
 
 public class Login {
     @FXML
@@ -25,7 +26,7 @@ public class Login {
     public void handleLogin(ActionEvent actionEvent) {
         App.getAccountsManager()
                 .verifyCredentials(userNameField.getText(), passwordField.getText())
-                .ifPresentOrElse(acc -> App.changeView("../fxml/home/home.fxml"), () -> {
+                .ifPresentOrElse(acc -> App.changeView(ViewFinder.get("home")), () -> {
                     statusLabel.setTextFill(Color.RED);
                     statusLabel.setText("Invalid username/password!");
                 });
@@ -33,6 +34,6 @@ public class Login {
 
     @FXML
     public void handleRegister(ActionEvent actionEvent) {
-        App.changeView("../fxml/register.fxml");
+        App.changeView(ViewFinder.get("register"));
     }
 }
