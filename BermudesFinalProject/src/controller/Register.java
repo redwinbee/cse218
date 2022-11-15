@@ -40,20 +40,40 @@ public class Register implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         validator.createCheck()
+                .dependsOn("firstName", firstNameField.textProperty())
+                .dependsOn("lastName", lastNameField.textProperty())
                 .dependsOn("username", userNameField.textProperty())
                 .dependsOn("email", emailField.textProperty())
+                .dependsOn("password", passwordField.textProperty())
                 .withMethod(c -> {
                     if (App.getAccountsManager().exists(userNameField.getText(), emailField.getText())) {
                         c.error("Username/email already in use");
+                        registerButton.setDisable(true);
+                    } else {
+                        registerButton.setDisable(false);
                     }
                 })
+                .withMethod(c -> {
+                    if (fieldsEmpty()) {
+                        c.error("Please fill in this field");
+                        registerButton.setDisable(true);
+                    } else {
+                        registerButton.setDisable(false);
+                    }
+                })
+                .decorates(firstNameField)
+                .decorates(lastNameField)
                 .decorates(userNameField)
                 .decorates(emailField)
-                .immediate();
+                .decorates(passwordField);
     }
 
     @FXML
     public void handleRegister(ActionEvent actionEvent) {
+        if (!validator.validate()) {
+            registerButton.setDisable(false);
+            return;
+        }
         Name name = new Name(firstNameField.getText(), lastNameField.getText());
         String userName = userNameField.getText();
         String email = emailField.getText();
@@ -71,5 +91,13 @@ public class Register implements Initializable {
     @FXML
     public void handleBack(ActionEvent actionEvent) {
         App.changeView("../fxml/login.fxml");
+    }
+
+    private boolean fieldsEmpty() {
+        return firstNameField.getText().isEmpty()
+                || lastNameField.getText().isEmpty()
+                || emailField.getText().isEmpty()
+                || userNameField.getText().isEmpty()
+                || passwordField.getText().isEmpty();
     }
 }

@@ -35,9 +35,4 @@ public class Login {
     public void handleRegister(ActionEvent actionEvent) {
         App.changeView("../fxml/register.fxml");
     }
-
-    private void clearFields() {
-        userNameField.clear();
-        passwordField.clear();
-    }
 }
