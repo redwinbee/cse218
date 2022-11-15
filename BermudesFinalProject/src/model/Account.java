@@ -1,7 +1,5 @@
 package model;
 
-import util.Generator;
-
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -15,7 +13,7 @@ public class Account implements Serializable, Comparable<Account> {
     private String password;
 
     public Account(Name name, String userName, String email, String password) {
-        this.uuid = Generator.createUniqueAccountId();
+        this.uuid = UUID.randomUUID();
         this.name = name;
         this.userName = userName;
         this.email = email;
