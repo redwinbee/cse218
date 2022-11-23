@@ -1,6 +1,7 @@
 package controller;
 
 import app.App;
+import controller.home.Home;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,7 +27,10 @@ public class Login {
     public void handleLogin(ActionEvent actionEvent) {
         App.getAccountsManager()
                 .verifyCredentials(userNameField.getText(), passwordField.getText())
-                .ifPresentOrElse(acc -> App.changeView(ViewFinder.get("home")), () -> {
+                .ifPresentOrElse(acc -> {
+                    Home.setContext(acc);
+                    App.changeView(ViewFinder.get("home"));
+                }, () -> {
                     statusLabel.setTextFill(Color.RED);
                     statusLabel.setText("Invalid username/password!");
                 });

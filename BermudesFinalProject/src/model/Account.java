@@ -1,12 +1,14 @@
 package model;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.UUID;
 
 public class Account implements Serializable, Comparable<Account> {
     private final UUID uuid;
+    private final LinkedList<Post> posts;
     private Name name;
     private String userName;
     private String email;
@@ -18,6 +20,7 @@ public class Account implements Serializable, Comparable<Account> {
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.posts = new LinkedList<>();
     }
 
     public UUID getUuid() {
@@ -55,6 +58,11 @@ public class Account implements Serializable, Comparable<Account> {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public LinkedList<Post> getPosts() {
+        return posts;
+    }
+
 
     @Override
     public int compareTo(Account other) {
