@@ -56,6 +56,7 @@ public class Home implements Initializable {
             controller.updatePostTime(post.getTimePosted());
             if (selectedFile != null) {
                 controller.updateFile(selectedFile);
+                this.selectedFile = null;
             }
             postsBox.getChildren().add(0, postPane);
             postTextArea.clear();
