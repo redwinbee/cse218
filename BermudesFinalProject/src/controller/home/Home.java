@@ -8,10 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import model.Account;
 import model.Post;
 import util.ViewFinder;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -24,7 +26,11 @@ public class Home implements Initializable {
     @FXML
     private Button postButton;
     @FXML
+    private Button attachButton;
+    @FXML
     private VBox postsBox;
+
+    private File selectedFile;
 
     public static void setContext(Account context) {
         Home.context = context;
@@ -38,7 +44,7 @@ public class Home implements Initializable {
     @FXML
     private void onPost(ActionEvent event) {
         String body = postTextArea.getText();
-        Post post = createPost(body);
+        Post post = (this.selectedFile != null) ? createPostWithAttach(body, selectedFile) : createPost(body);
         context.getPosts().add(post);
         try {
             FXMLLoader loader = new FXMLLoader(ViewFinder.get("post"));
@@ -48,10 +54,24 @@ public class Home implements Initializable {
             controller.updateUserName(context.getUserName());
             controller.updateBody(postTextArea.getText());
             controller.updatePostTime(post.getTimePosted());
+            if (selectedFile != null) {
+                controller.updateFile(selectedFile);
+            }
             postsBox.getChildren().add(0, postPane);
             postTextArea.clear();
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onAttach(ActionEvent event) {
+        FileChooser chooser = new FileChooser();
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("*.images", "jpg", "png", "gif");
+        chooser.setSelectedExtensionFilter(filter);
+        File result = chooser.showOpenDialog(null);
+        if (result != null) {
+            this.selectedFile = result;
         }
     }
 
@@ -65,6 +85,9 @@ public class Home implements Initializable {
                 controller.updateUserName(post.getAuthor().getUserName());
                 controller.updateBody(post.getBody());
                 controller.updatePostTime(post.getTimePosted());
+                if (post.getAttachment() != null) {
+                    controller.updateFile(post.getAttachment());
+                }
                 postsBox.getChildren().add(0, postPane);
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -74,5 +97,9 @@ public class Home implements Initializable {
 
     private Post createPost(String postBody) {
         return new Post(context, LocalDateTime.now(), postBody);
+    }
+
+    private Post createPostWithAttach(String postBody, File attach) {
+        return new Post(context, LocalDateTime.now(), postBody, attach);
     }
 }

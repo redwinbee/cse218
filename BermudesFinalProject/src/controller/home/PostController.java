@@ -2,8 +2,13 @@ package controller.home;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,6 +21,8 @@ public class PostController {
     private Text body;
     @FXML
     private Label postTime;
+    @FXML
+    private ImageView imageView;
 
     public void updateFullName(String name) {
         this.fullName.setText(name);
@@ -31,5 +38,17 @@ public class PostController {
 
     public void updatePostTime(LocalDateTime time) {
         this.postTime.setText(time.format(DateTimeFormatter.ofPattern("E, MMM dd yyyy HH:mm")));
+    }
+
+    public void updateFile(File file) {
+        try {
+            FileInputStream stream = new FileInputStream(file.getPath());
+            this.imageView.setImage(new Image(stream));
+            this.imageView.setFitHeight(299); // arbitrary values, just need it to fit the screen
+            this.imageView.setFitWidth(133);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+
     }
 }

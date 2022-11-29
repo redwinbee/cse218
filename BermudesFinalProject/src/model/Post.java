@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -9,11 +10,19 @@ public class Post implements Serializable {
     private Account author;
     private LocalDateTime timePosted;
     private String body;
+    private File attachment;
 
     public Post(Account author, LocalDateTime timePosted, String body) {
         this.author = author;
         this.timePosted = timePosted;
         this.body = body;
+    }
+
+    public Post(Account author, LocalDateTime timePosted, String body, File attachment) {
+        this.author = author;
+        this.timePosted = timePosted;
+        this.body = body;
+        this.attachment = attachment;
     }
 
     public Account getAuthor() {
@@ -38,6 +47,10 @@ public class Post implements Serializable {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public File getAttachment() {
+        return attachment;
     }
 
     @Override

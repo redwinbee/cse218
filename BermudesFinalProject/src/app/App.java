@@ -36,7 +36,6 @@ public class App extends Application {
         return accountsManager;
     }
 
-
     @Override
     public void init() throws Exception {
         accountsManager = Storage.ACCOUNTS_FILE.exists() ? Storage.restore() : new AccountsManager(new TreeSet<>());

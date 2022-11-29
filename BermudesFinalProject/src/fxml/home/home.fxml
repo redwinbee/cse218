@@ -31,7 +31,7 @@
                         <Font name="Rockwell" size="13.0"/>
                     </font>
                 </Button>
-                <Button fx:id="attachButton" mnemonicParsing="false" text="Attach">
+                <Button fx:id="attachButton" mnemonicParsing="false" onAction="#onAttach" text="Attach">
                     <font>
                         <Font name="Rockwell" size="13.0"/>
                     </font>

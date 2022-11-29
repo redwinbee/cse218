@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19"
@@ -30,6 +31,7 @@
                         <Font name="Rockwell" size="12.0"/>
                     </font>
                 </Text>
+                <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true"/>
                 <HBox spacing="20.0">
                     <children>
                         <Label fx:id="postTime" alignment="CENTER" text="11/22/22 13:22 EST">
