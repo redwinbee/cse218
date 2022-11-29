@@ -28,6 +28,8 @@ public class Home implements Initializable {
     @FXML
     private Button attachButton;
     @FXML
+    private Button removeAttachButton;
+    @FXML
     private VBox postsBox;
 
     private File selectedFile;
@@ -73,7 +75,14 @@ public class Home implements Initializable {
         File result = chooser.showOpenDialog(null);
         if (result != null) {
             this.selectedFile = result;
+            removeAttachButton.setDisable(false);
         }
+    }
+
+    @FXML
+    private void onRemoveAttachment(ActionEvent event) {
+        this.selectedFile = null;
+        removeAttachButton.setDisable(true);
     }
 
     private void initializePosts() {

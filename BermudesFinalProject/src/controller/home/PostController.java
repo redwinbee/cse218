@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.io.File;
@@ -50,5 +51,9 @@ public class PostController {
             ex.printStackTrace();
         }
 
+    }
+
+    public void openPost(MouseEvent mouseEvent) {
+        System.out.println("clicked!");
     }
 }
