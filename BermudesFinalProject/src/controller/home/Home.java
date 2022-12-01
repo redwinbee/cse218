@@ -4,9 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import model.Account;
@@ -22,6 +25,12 @@ import java.util.ResourceBundle;
 public class Home implements Initializable {
     private static Account context;
     @FXML
+    public BorderPane borderPane;
+    @FXML
+    public MenuItem homeMenu;
+    @FXML
+    public MenuItem searchMenu;
+    @FXML
     private TextArea postTextArea;
     @FXML
     private Button postButton;
@@ -33,6 +42,7 @@ public class Home implements Initializable {
     private VBox postsBox;
 
     private File selectedFile;
+    private Node prevCenter;
 
     public static void setContext(Account context) {
         Home.context = context;
@@ -69,6 +79,24 @@ public class Home implements Initializable {
     }
 
     @FXML
+    public void onHomeMenu(ActionEvent actionEvent) {
+        if (prevCenter != null) {
+            borderPane.setCenter(prevCenter);
+        }
+    }
+
+    @FXML
+    public void onSearchMenu(ActionEvent actionEvent) {
+        try {
+            this.prevCenter = borderPane.getCenter();
+            borderPane.setCenter(new FXMLLoader(ViewFinder.get("search")).load());
+            SearchController.setContext(context);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
     private void onAttach(ActionEvent event) {
         FileChooser chooser = new FileChooser();
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("*.images", "jpg", "png", "gif");
@@ -87,21 +115,23 @@ public class Home implements Initializable {
     }
 
     private void initializePosts() {
-        context.getPosts().forEach(post -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(ViewFinder.get("post"));
-                AnchorPane postPane = loader.load();
-                PostController controller = loader.getController();
-                controller.updateFullName(post.getAuthor().getName().toString());
-                controller.updateUserName(post.getAuthor().getUserName());
-                controller.updateBody(post.getBody());
-                controller.updatePostTime(post.getTimePosted());
-                if (post.getAttachment() != null) {
-                    controller.updateFile(post.getAttachment());
+        context.getSubscribers().forEach(acc -> {
+            for (Post post : acc.getPosts()) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(ViewFinder.get("post"));
+                    AnchorPane postPane = loader.load();
+                    PostController controller = loader.getController();
+                    controller.updateFullName(post.getAuthor().getName().toString());
+                    controller.updateUserName(post.getAuthor().getUserName());
+                    controller.updateBody(post.getBody());
+                    controller.updatePostTime(post.getTimePosted());
+                    if (post.getAttachment() != null) {
+                        controller.updateFile(post.getAttachment());
+                    }
+                    postsBox.getChildren().add(0, postPane);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
-                postsBox.getChildren().add(0, postPane);
-            } catch (IOException ex) {
-                ex.printStackTrace();
             }
         });
     }

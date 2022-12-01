@@ -13,6 +13,8 @@ public class ViewFinder {
         views.put("register", "../fxml/register.fxml");
         views.put("home", "../fxml/home/home.fxml");
         views.put("post", "../fxml/home/post.fxml");
+        views.put("search", "../fxml/home/search.fxml");
+        views.put("search_result", "../fxml/home/search_result.fxml");
     }
 
     private ViewFinder() {

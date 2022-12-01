@@ -1,14 +1,13 @@
 package model;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.Objects;
-import java.util.StringJoiner;
-import java.util.UUID;
+import java.util.*;
 
 public class Account implements Serializable, Comparable<Account> {
     private final UUID uuid;
     private final LinkedList<Post> posts;
+    private final HashSet<Account> subscribers;
+    private final HashSet<Account> subscriptions;
     private Name name;
     private String userName;
     private String email;
@@ -21,6 +20,8 @@ public class Account implements Serializable, Comparable<Account> {
         this.email = email;
         this.password = password;
         this.posts = new LinkedList<>();
+        this.subscribers = new HashSet<>();
+        this.subscriptions = new HashSet<>();
     }
 
     public UUID getUuid() {
@@ -63,6 +64,13 @@ public class Account implements Serializable, Comparable<Account> {
         return posts;
     }
 
+    public HashSet<Account> getSubscribers() {
+        return subscribers;
+    }
+
+    public HashSet<Account> getSubscriptions() {
+        return subscriptions;
+    }
 
     @Override
     public int compareTo(Account other) {
