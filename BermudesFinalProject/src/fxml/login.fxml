@@ -41,6 +41,12 @@
                         <Font name="Rockwell" size="11.0"/>
                     </font>
                 </Label>
+                <Button fx:id="reconstruct" mnemonicParsing="false" onAction="#onReconstruct"
+                        style="-fx-background-color: #ff7f7f;" text="Reconstruct">
+                    <font>
+                        <Font name="Rockwell" size="12.0"/>
+                    </font>
+                </Button>
             </children>
             <opaqueInsets>
                 <Insets/>

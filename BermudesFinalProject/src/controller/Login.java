@@ -9,9 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import persistence.Generator;
 import util.ViewFinder;
 
 public class Login {
+    public Button reconstruct;
     @FXML
     private TextField userNameField;
     @FXML
@@ -22,6 +24,14 @@ public class Login {
     private Button registerButton;
     @FXML
     private Label statusLabel;
+
+    public void onReconstruct(ActionEvent actionEvent) {
+        System.out.println("[info]: reconstructing accounts manager with random values...");
+        App.setAccountsManager(Generator.generate(1_000));
+        statusLabel.setTextFill(Color.RED);
+        statusLabel.setText("Reconstructed with 1,000 accounts");
+        reconstruct.setDisable(true);
+    }
 
     @FXML
     public void handleLogin(ActionEvent actionEvent) {

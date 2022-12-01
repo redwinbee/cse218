@@ -5,27 +5,28 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="42.0" prefWidth="170.0" xmlns="http://javafx.com/javafx/19"
             fx:controller="controller.home.SearchResultController">
-   <children>
-      <HBox alignment="CENTER_LEFT" layoutX="104.0" layoutY="88.0" prefHeight="115.0" prefWidth="169.5" spacing="10.0"
-            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-            AnchorPane.topAnchor="0.0">
-         <children>
-            <Button fx:id="subscribe" mnemonicParsing="false" onAction="#onSubscribe"
-                    style="-fx-background-color: #a5d2a5;" text="+">
-               <font>
-                  <Font name="Rockwell" size="13.0"/>
-               </font>
-            </Button>
-            <Button fx:id="unsubscribe" minHeight="27.0" minWidth="26.5" mnemonicParsing="false"
-                    onAction="#onUnsubscribe" style="-fx-background-color: ff7f7f;" text="-" visible="false"/>
-            <Text fx:id="accountName" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name" textAlignment="CENTER">
-               <font>
-                  <Font name="Rockwell" size="13.0"/>
+    <children>
+        <HBox alignment="CENTER_LEFT" layoutX="104.0" layoutY="88.0" prefHeight="115.0" prefWidth="169.5" spacing="10.0"
+              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
+            <children>
+                <Button fx:id="subscribe" mnemonicParsing="false" onAction="#onSubscribe"
+                        style="-fx-background-color: #a5d2a5;" text="+">
+                    <font>
+                        <Font name="Rockwell" size="13.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="unsubscribe" minHeight="27.0" minWidth="26.5" mnemonicParsing="false"
+                        onAction="#onUnsubscribe" style="-fx-background-color: ff7f7f;" text="-" visible="false"/>
+                <Text fx:id="accountName" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name"
+                      textAlignment="CENTER">
+                    <font>
+                        <Font name="Rockwell" size="13.0"/>
                </font>
             </Text>
             <Text fx:id="accountUserName" fill="#838383" strokeType="OUTSIDE" strokeWidth="0.0" text="\@handle">
                <font>
-                  <Font name="Rockwell" size="13.0"/>
+                   <Font name="Rockwell" size="13.0"/>
                </font>
             </Text>
          </children>
