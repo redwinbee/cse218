@@ -27,9 +27,9 @@ public class Login {
 
     public void onReconstruct(ActionEvent actionEvent) {
         System.out.println("[info]: reconstructing accounts manager with random values...");
-        App.setAccountsManager(Generator.generate(1_000));
+        App.setAccountsManager(Generator.generate(App.NUM_RANDOM_ACCOUNTS));
         statusLabel.setTextFill(Color.RED);
-        statusLabel.setText("Reconstructed with 1,000 accounts");
+        statusLabel.setText("Reconstructed with " + App.NUM_RANDOM_ACCOUNTS + " accounts");
         reconstruct.setDisable(true);
     }
 
