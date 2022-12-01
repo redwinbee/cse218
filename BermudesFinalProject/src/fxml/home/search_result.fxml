@@ -22,14 +22,14 @@
                       textAlignment="CENTER">
                     <font>
                         <Font name="Rockwell" size="13.0"/>
-               </font>
-            </Text>
-            <Text fx:id="accountUserName" fill="#838383" strokeType="OUTSIDE" strokeWidth="0.0" text="\@handle">
-               <font>
-                   <Font name="Rockwell" size="13.0"/>
-               </font>
-            </Text>
-         </children>
-      </HBox>
-   </children>
+                    </font>
+                </Text>
+                <Text fx:id="accountUserName" fill="#838383" strokeType="OUTSIDE" strokeWidth="0.0" text="\@handle">
+                    <font>
+                        <Font name="Rockwell" size="13.0"/>
+                    </font>
+                </Text>
+            </children>
+        </HBox>
+    </children>
 </AnchorPane>
