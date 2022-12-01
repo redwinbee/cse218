@@ -59,6 +59,7 @@ public class Home implements Initializable {
             if (selectedFile != null) {
                 controller.updateFile(selectedFile);
                 this.selectedFile = null;
+                removeAttachButton.setDisable(true);
             }
             postsBox.getChildren().add(0, postPane);
             postTextArea.clear();

@@ -7,7 +7,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="javafx-19-javadoc" level="project" />
     <orderEntry type="library" name="javafx-sdk-19" level="project" />
     <orderEntry type="library" name="validatorfx-0.4.0" level="project" />
     <orderEntry type="library" name="validatorfx-0.4.0-javadoc" level="project" />
