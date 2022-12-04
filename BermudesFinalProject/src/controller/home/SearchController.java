@@ -41,7 +41,8 @@ public class SearchController implements Initializable {
     public void onFind(ActionEvent actionEvent) {
         clearResultsBox();
         App.getAccountsManager().all().stream()
-                .filter(acc -> acc.getName().toString().toLowerCase().contains(searchField.getText().toLowerCase()))
+                .filter(acc -> acc.getName().toString().toLowerCase().contains(searchField.getText().toLowerCase())
+                        || acc.getUserName().toLowerCase().contains(searchField.getText().toLowerCase()))
                 .forEach(acc -> loadAccountResult(acc).ifPresent(node -> resultsBox.getChildren().add(node)));
     }
 
