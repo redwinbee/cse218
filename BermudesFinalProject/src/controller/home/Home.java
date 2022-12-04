@@ -79,14 +79,14 @@ public class Home implements Initializable {
     }
 
     @FXML
-    public void onHomeMenu(ActionEvent actionEvent) {
+    public void onHomeMenu() {
         if (prevCenter != null) {
             borderPane.setCenter(prevCenter);
         }
     }
 
     @FXML
-    public void onSearchMenu(ActionEvent actionEvent) {
+    public void onSearchMenu() {
         try {
             this.prevCenter = borderPane.getCenter();
             borderPane.setCenter(new FXMLLoader(ViewFinder.get("search")).load());

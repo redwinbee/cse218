@@ -7,11 +7,10 @@ public class Account implements Serializable, Comparable<Account> {
     private final UUID uuid;
     private final LinkedList<Post> posts;
     private final HashSet<Account> subscribers;
-    private final HashSet<Account> subscriptions;
-    private Name name;
-    private String userName;
-    private String email;
-    private String password;
+    private final Name name;
+    private final String userName;
+    private final String email;
+    private final String password;
 
     public Account(Name name, String userName, String email, String password) {
         this.uuid = UUID.randomUUID();
@@ -21,7 +20,6 @@ public class Account implements Serializable, Comparable<Account> {
         this.password = password;
         this.posts = new LinkedList<>();
         this.subscribers = new HashSet<>();
-        this.subscriptions = new HashSet<>();
     }
 
     public UUID getUuid() {
@@ -32,32 +30,16 @@ public class Account implements Serializable, Comparable<Account> {
         return name;
     }
 
-    public void setName(Name name) {
-        this.name = name;
-    }
-
     public String getUserName() {
         return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public LinkedList<Post> getPosts() {
@@ -66,10 +48,6 @@ public class Account implements Serializable, Comparable<Account> {
 
     public HashSet<Account> getSubscribers() {
         return subscribers;
-    }
-
-    public HashSet<Account> getSubscriptions() {
-        return subscriptions;
     }
 
     @Override

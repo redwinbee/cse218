@@ -46,7 +46,7 @@ public class App extends Application {
     }
 
     @Override
-    public void init() throws Exception {
+    public void init() {
         accountsManager = Storage.ACCOUNTS_FILE.exists() ? Storage.restore() : new AccountsManager(new TreeSet<>());
         if (accountsManager != null) {
             Storage.backup(accountsManager);

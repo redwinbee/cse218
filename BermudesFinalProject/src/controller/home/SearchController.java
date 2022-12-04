@@ -1,7 +1,6 @@
 package controller.home;
 
 import app.App;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,7 +37,7 @@ public class SearchController implements Initializable {
     }
 
     @FXML
-    public void onFind(ActionEvent actionEvent) {
+    public void onFind() {
         clearResultsBox();
         App.getAccountsManager().all().stream()
                 .filter(acc -> acc.getName().toString().toLowerCase().contains(searchField.getText().toLowerCase())

@@ -6,7 +6,6 @@ import model.Name;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Optional;
-import java.util.UUID;
 
 public class AccountsManager {
     private final Collection<Account> accounts;
@@ -23,10 +22,6 @@ public class AccountsManager {
 
     public Collection<Account> all() {
         return accounts;
-    }
-
-    public boolean exists(UUID uuid) {
-        return accounts.stream().anyMatch(acc -> acc.getUuid().equals(uuid));
     }
 
     public boolean exists(String userName, String email) {
@@ -46,10 +41,6 @@ public class AccountsManager {
 
     public void add(Account account) {
         accounts.add(account);
-    }
-
-    public void remove(Account account) {
-        accounts.remove(account);
     }
 
     public int size() {

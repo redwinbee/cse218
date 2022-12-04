@@ -1,6 +1,5 @@
 package controller.home;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -24,13 +23,13 @@ public class SearchResultController {
     }
 
     @FXML
-    public void onSubscribe(ActionEvent actionEvent) {
+    public void onSubscribe() {
         context.getSubscribers().add(account);
         showUnsubscribe();
     }
 
     @FXML
-    public void onUnsubscribe(ActionEvent actionEvent) {
+    public void onUnsubscribe() {
         context.getSubscribers().remove(account);
         showSubscribe();
     }

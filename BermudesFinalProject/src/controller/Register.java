@@ -1,7 +1,6 @@
 package controller;
 
 import app.App;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -70,7 +69,7 @@ public class Register implements Initializable {
     }
 
     @FXML
-    public void handleRegister(ActionEvent actionEvent) {
+    public void handleRegister() {
         if (!validator.validate()) {
             registerButton.setDisable(false);
             return;
@@ -90,7 +89,7 @@ public class Register implements Initializable {
     }
 
     @FXML
-    public void handleBack(ActionEvent actionEvent) {
+    public void handleBack() {
         App.changeView(ViewFinder.get("login"));
     }
 

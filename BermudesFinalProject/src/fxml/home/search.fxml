@@ -8,25 +8,19 @@
 <?import javafx.scene.text.Font?>
 <ScrollPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19"
             fx:controller="controller.home.SearchController">
-    <content>
-        <VBox fx:id="resultsBox" alignment="CENTER">
-            <children>
-                <HBox spacing="10.0">
-                    <children>
-                        <TextField fx:id="searchField" prefHeight="27.0" prefWidth="223.0"
-                                   promptText="Search by name or handle">
-                            <font>
-                                <Font name="Rockwell" size="13.0"/>
-                            </font>
-                        </TextField>
-                        <Button fx:id="findButton" mnemonicParsing="false" onAction="#onFind" text="Find">
-                            <font>
-                                <Font name="Rockwell" size="13.0"/>
-                            </font>
-                        </Button>
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-    </content>
+    <VBox fx:id="resultsBox" alignment="CENTER">
+        <HBox spacing="10.0">
+            <TextField fx:id="searchField" prefHeight="27.0" prefWidth="223.0"
+                       promptText="Search by name or handle">
+                <font>
+                    <Font name="Rockwell" size="13.0"/>
+                </font>
+            </TextField>
+            <Button fx:id="findButton" mnemonicParsing="false" onAction="#onFind" text="Find">
+                <font>
+                    <Font name="Rockwell" size="13.0"/>
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
 </ScrollPane>

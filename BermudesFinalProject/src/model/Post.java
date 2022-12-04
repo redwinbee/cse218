@@ -7,9 +7,9 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 public class Post implements Serializable {
-    private Account author;
-    private LocalDateTime timePosted;
-    private String body;
+    private final Account author;
+    private final LocalDateTime timePosted;
+    private final String body;
     private File attachment;
 
     public Post(Account author, LocalDateTime timePosted, String body) {
@@ -29,24 +29,12 @@ public class Post implements Serializable {
         return author;
     }
 
-    public void setAuthor(Account author) {
-        this.author = author;
-    }
-
     public LocalDateTime getTimePosted() {
         return timePosted;
     }
 
-    public void setTimePosted(LocalDateTime timePosted) {
-        this.timePosted = timePosted;
-    }
-
     public String getBody() {
         return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
     }
 
     public File getAttachment() {
