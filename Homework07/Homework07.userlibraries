@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="javafx-19-javadoc" />
+  <library name="javafx-sdk-19">
+    <archive path="/Users/redwinbee/Projects/java/lib/javafx-sdk-19/lib/javafx-swt.jar" />
+    <archive path="/Users/redwinbee/Projects/java/lib/javafx-sdk-19/lib/javafx.web.jar" />
+    <archive path="/Users/redwinbee/Projects/java/lib/javafx-sdk-19/lib/javafx.base.jar" />
+    <archive path="/Users/redwinbee/Projects/java/lib/javafx-sdk-19/lib/javafx.fxml.jar" />
+    <archive path="/Users/redwinbee/Projects/java/lib/javafx-sdk-19/lib/javafx.media.jar" />
+    <archive path="/Users/redwinbee/Projects/java/lib/javafx-sdk-19/lib/javafx.swing.jar" />
+    <archive path="/Users/redwinbee/Projects/java/lib/javafx-sdk-19/lib/javafx.controls.jar" />
+    <archive path="/Users/redwinbee/Projects/java/lib/javafx-sdk-19/lib/javafx.graphics.jar" />
+  </library>
+</eclipse-userlibraries>
+

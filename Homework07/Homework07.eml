@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<levels>
+		<level name="javafx-sdk-19" value="project"/>
+		<level name="javafx-19-javadoc" value="project"/>
+	</levels>
+</component>
