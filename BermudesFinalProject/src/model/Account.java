@@ -5,12 +5,12 @@ import java.util.*;
 
 public class Account implements Serializable, Comparable<Account> {
     private final UUID uuid;
-    private final LinkedList<Post> posts;
     private final HashSet<Account> subscribers;
     private final Name name;
     private final String userName;
     private final String email;
     private final String password;
+    private LinkedList<Post> posts;
 
     public Account(Name name, String userName, String email, String password) {
         this.uuid = UUID.randomUUID();
@@ -44,6 +44,10 @@ public class Account implements Serializable, Comparable<Account> {
 
     public LinkedList<Post> getPosts() {
         return posts;
+    }
+
+    public void setPosts(LinkedList<Post> randomPosts) {
+        this.posts = randomPosts;
     }
 
     public HashSet<Account> getSubscribers() {
