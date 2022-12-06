@@ -80,6 +80,8 @@ public class Home implements Initializable {
 
     @FXML
     public void onHomeMenu() {
+        // this is probably incredibly inefficient
+        initializePosts();
         if (prevCenter != null) {
             borderPane.setCenter(prevCenter);
         }
