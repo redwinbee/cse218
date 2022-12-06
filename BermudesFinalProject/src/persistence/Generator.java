@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class Generator {
     private static final int RAND_NUM_POSTS_PER_ACC = 50;
@@ -34,7 +35,7 @@ public class Generator {
             Account randAcc = new Account(randName, randUserName, randEmail, "password");
 
             // add some random posts to that account
-            ArrayList<Post> randomPosts = generateRandomPosts(randAcc, (int) (Math.random() * RAND_NUM_POSTS_PER_ACC));
+            LinkedList<Post> randomPosts = generateRandomPosts(randAcc, (int) (Math.random() * RAND_NUM_POSTS_PER_ACC));
             randAcc.setPosts(randomPosts);
 
             accounts.add(randAcc);
@@ -48,14 +49,13 @@ public class Generator {
         return new AccountsManager(accounts);
     }
 
-    private static ArrayList<Post> generateRandomPosts(Account author, int numPosts) {
+    private static LinkedList<Post> generateRandomPosts(Account author, int numPosts) {
         ArrayList<Post> posts = new ArrayList<>();
         ThreadLocalRandom threadedRandom = ThreadLocalRandom.current();
 
-        // parallelize the outer loop
-        posts.parallelStream().forEach(i -> {
+        for (int i = 0; i < numPosts; i++) {
             // Use the ThreadLocalRandom object to generate the number of characters
-            double numChars = (threadedRandom.nextDouble() * RAND_NUM_CHARS_PER_POST) + 32; // at least 32 chars long
+            int numChars = (int) ((threadedRandom.nextDouble() * RAND_NUM_CHARS_PER_POST) + 32); // at least 32 chars long
 
             // Use a char array to store the content of the post
             char[] postContent = new char[(int) numChars];
@@ -68,9 +68,9 @@ public class Generator {
             }
 
             posts.add(new Post(author, LocalDateTime.now(), new String(postContent)));
-        });
+        }
 
-        return posts;
+        return posts.parallelStream().collect(Collectors.toCollection(LinkedList::new));
     }
 
 
