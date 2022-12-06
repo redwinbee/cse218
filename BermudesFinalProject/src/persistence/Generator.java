@@ -8,10 +8,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Random;
 import java.util.TreeSet;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Generator {
     private static final int RAND_NUM_POSTS_PER_ACC = 50;
@@ -33,7 +34,7 @@ public class Generator {
             Account randAcc = new Account(randName, randUserName, randEmail, "password");
 
             // add some random posts to that account
-            LinkedList<Post> randomPosts = generateRandomPosts(randAcc, (int) (Math.random() * RAND_NUM_POSTS_PER_ACC));
+            ArrayList<Post> randomPosts = generateRandomPosts(randAcc, (int) (Math.random() * RAND_NUM_POSTS_PER_ACC));
             randAcc.setPosts(randomPosts);
 
             accounts.add(randAcc);
@@ -47,26 +48,31 @@ public class Generator {
         return new AccountsManager(accounts);
     }
 
-    private static LinkedList<Post> generateRandomPosts(Account author, int numPosts) {
-        LinkedList<Post> posts = new LinkedList<>();
+    private static ArrayList<Post> generateRandomPosts(Account author, int numPosts) {
+        ArrayList<Post> posts = new ArrayList<>();
+        ThreadLocalRandom threadedRandom = ThreadLocalRandom.current();
 
-        for (int i = 0; i < numPosts; i++) {
-            double numChars = (Math.random() * RAND_NUM_CHARS_PER_POST) + 32; // at least 32 chars long
-            StringBuilder sb = new StringBuilder();
+        // parallelize the outer loop
+        posts.parallelStream().forEach(i -> {
+            // Use the ThreadLocalRandom object to generate the number of characters
+            double numChars = (threadedRandom.nextDouble() * RAND_NUM_CHARS_PER_POST) + 32; // at least 32 chars long
+
+            // Use a char array to store the content of the post
+            char[] postContent = new char[(int) numChars];
+
             for (int j = 0; j < numChars; j++) {
-                // generate the random letters and append them to the StringBuilder
-                char randomLetter = (new Random().nextInt(52) < 26)
-                        ? (char) ('A' + new Random().nextInt(26))
-                        : (char) ('a' + new Random().nextInt(26));
-
-                sb.append(randomLetter);
+                // Generate a random letter and append it to the char array
+                postContent[j] = (threadedRandom.nextInt(52) < 26)
+                        ? (char) ('A' + threadedRandom.nextInt(26))
+                        : (char) ('a' + threadedRandom.nextInt(26));
             }
 
-            posts.add(new Post(author, LocalDateTime.now(), sb.toString()));
-        }
+            posts.add(new Post(author, LocalDateTime.now(), new String(postContent)));
+        });
 
         return posts;
     }
+
 
     private static HashSet<Name> importNames() {
         LinkedList<String> firstNames = readFile("import/first_names.txt");
