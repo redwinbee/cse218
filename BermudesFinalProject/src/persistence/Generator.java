@@ -8,10 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -26,7 +23,7 @@ public class Generator {
         LinkedList<String> emails = readFile("import/emails.txt");
         LinkedList<String> userNames = readFile("import/user_names.txt");
         HashSet<Name> names = importNames();
-        TreeSet<Account> accounts = new TreeSet<>();
+        Map<UUID, Account> accounts = new TreeMap<>();
         for (int i = 0; i < numAccounts; i++) {
             // create a random account with random values
             Name randName = names.stream().toList().get((int) (Math.random() * names.size()));
@@ -38,13 +35,13 @@ public class Generator {
             LinkedList<Post> randomPosts = generateRandomPosts(randAcc, (int) (Math.random() * RAND_NUM_POSTS_PER_ACC));
             randAcc.setPosts(randomPosts);
 
-            accounts.add(randAcc);
+            accounts.put(randAcc.getUuid(), randAcc);
         }
 
         // add the basic account too
         Name name = new Name("John", "Doe");
         Account johnDoeAccount = new Account(name, "johndoe", "johndoe@example.com", "password");
-        accounts.add(johnDoeAccount);
+        accounts.put(johnDoeAccount.getUuid(), johnDoeAccount);
 
         return new AccountsManager(accounts);
     }

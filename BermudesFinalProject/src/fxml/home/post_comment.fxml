@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19"
+            fx:controller="controller.home.PostCommentController">
+    <children>
+        <VBox layoutX="-0.4951171875" spacing="10.0">
+            <children>
+                <HBox spacing="10.0">
+                    <children>
+                        <Label fx:id="fullName" text="John Doe">
+                            <font>
+                                <Font name="Rockwell" size="13.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="userName" text="\@johndoe" textFill="#8a8a8a">
+                            <font>
+                                <Font name="Rockwell" size="13.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <Text fx:id="body" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                    <font>
+                        <Font name="Rockwell" size="13.0"/>
+                    </font>
+                </Text>
+                <Label fx:id="postTime" text="Label"/>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

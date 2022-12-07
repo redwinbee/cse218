@@ -3,29 +3,30 @@ package persistence;
 import model.Account;
 import model.Name;
 
-import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 public class AccountsManager {
-    private final Collection<Account> accounts;
+    private final Map<UUID, Account> accounts;
 
-    public AccountsManager(Collection<Account> accounts) {
+    public AccountsManager(Map<UUID, Account> accounts) {
         this.accounts = accounts;
     }
 
     public Optional<Account> verifyCredentials(String userName, String password) {
-        return accounts.stream()
+        return accounts.values().stream()
                 .filter(acc -> acc.getUserName().equals(userName) && acc.getPassword().equals(password))
                 .findAny();
     }
 
-    public Collection<Account> all() {
+    public Map<UUID, Account> all() {
         return accounts;
     }
 
     public boolean exists(String userName, String email) {
-        return accounts.stream().anyMatch(acc ->
+        return accounts.values().stream().anyMatch(acc ->
                 acc.getUserName().equals(userName) || acc.getEmail().equals(email));
     }
 
@@ -40,7 +41,7 @@ public class AccountsManager {
     }
 
     public void add(Account account) {
-        accounts.add(account);
+        accounts.put(account.getUuid(), account);
     }
 
     public int size() {
@@ -48,7 +49,7 @@ public class AccountsManager {
     }
 
     public void display() {
-        Iterator<Account> iter = accounts.iterator();
+        Iterator<Account> iter = accounts.values().iterator();
         int count = 0;
         while (iter.hasNext()) {
             System.out.printf("[%d]: %s%n", count++, iter.next());

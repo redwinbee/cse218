@@ -3,13 +3,15 @@ package persistence;
 import model.Account;
 
 import java.io.*;
-import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.UUID;
 
 public class Storage {
     public static final File ACCOUNTS_FILE = new File("data/accounts.dat");
 
     public static void backup(AccountsManager accountsManager) {
-        Collection<Account> accounts = accountsManager.all();
+        Map<UUID, Account> accounts = accountsManager.all();
         System.out.printf("[storage]: backing up %d account(s)...%n", accounts.size());
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ACCOUNTS_FILE))) {
             oos.writeObject(accounts);
@@ -22,7 +24,7 @@ public class Storage {
     public static AccountsManager restore() {
         AccountsManager accountsManager;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ACCOUNTS_FILE))) {
-            accountsManager = new AccountsManager((Collection<Account>) ois.readObject());
+            accountsManager = new AccountsManager((TreeMap<UUID, Account>) ois.readObject());
 
             System.out.printf("[storage]: restoring %d account(s)...%n", accountsManager.size());
             return accountsManager;

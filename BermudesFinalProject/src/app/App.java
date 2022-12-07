@@ -12,13 +12,13 @@ import util.ViewFinder;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 public class App extends Application {
     /**
      * The number of accounts that should be created when reconstructing a random AccountsManager
      **/
-    public static final int NUM_RANDOM_ACCOUNTS = 100;
+    public static final int NUM_RANDOM_ACCOUNTS = 1_000;
     private static Stage primaryStage;
     private static AccountsManager accountsManager;
 
@@ -47,7 +47,7 @@ public class App extends Application {
 
     @Override
     public void init() {
-        accountsManager = Storage.ACCOUNTS_FILE.exists() ? Storage.restore() : new AccountsManager(new TreeSet<>());
+        accountsManager = Storage.ACCOUNTS_FILE.exists() ? Storage.restore() : new AccountsManager(new TreeMap<>());
         if (accountsManager != null) {
             Storage.backup(accountsManager);
         }

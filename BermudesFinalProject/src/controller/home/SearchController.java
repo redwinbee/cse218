@@ -45,7 +45,7 @@ public class SearchController implements Initializable {
         String searchText = searchField.getText().toLowerCase();
         Pattern searchPattern = Pattern.compile(".*" + searchText + ".*");
 
-        for (Account acc : App.getAccountsManager().all()) {
+        for (Account acc : App.getAccountsManager().all().values()) {
             if (searchPattern.matcher(acc.getName().toString().toLowerCase()).matches()
                     || searchPattern.matcher(acc.getUserName().toLowerCase()).matches()) {
                 loadAccountResult(acc).ifPresent(node -> resultsBox.getChildren().add(node));
