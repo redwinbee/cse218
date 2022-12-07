@@ -48,9 +48,6 @@ public class App extends Application {
     @Override
     public void init() {
         accountsManager = Storage.ACCOUNTS_FILE.exists() ? Storage.restore() : new AccountsManager(new TreeMap<>());
-        if (accountsManager != null) {
-            Storage.backup(accountsManager);
-        }
         Objects.requireNonNull(accountsManager).display();
     }
 
