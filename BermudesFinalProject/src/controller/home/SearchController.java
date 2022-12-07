@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class SearchController implements Initializable {
     private static Account context;
@@ -39,10 +40,17 @@ public class SearchController implements Initializable {
     @FXML
     public void onFind() {
         clearResultsBox();
-        App.getAccountsManager().all().stream()
-                .filter(acc -> acc.getName().toString().toLowerCase().contains(searchField.getText().toLowerCase())
-                        || acc.getUserName().toLowerCase().contains(searchField.getText().toLowerCase()))
-                .forEach(acc -> loadAccountResult(acc).ifPresent(node -> resultsBox.getChildren().add(node)));
+
+        // Use a regular expression with a wildcard pattern to partially match against the name and username of each account
+        String searchText = searchField.getText().toLowerCase();
+        Pattern searchPattern = Pattern.compile(".*" + searchText + ".*");
+
+        for (Account acc : App.getAccountsManager().all()) {
+            if (searchPattern.matcher(acc.getName().toString().toLowerCase()).matches()
+                    || searchPattern.matcher(acc.getUserName().toLowerCase()).matches()) {
+                loadAccountResult(acc).ifPresent(node -> resultsBox.getChildren().add(node));
+            }
+        }
     }
 
     private Optional<Node> loadAccountResult(Account account) {
