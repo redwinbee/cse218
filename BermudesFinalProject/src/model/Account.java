@@ -1,10 +1,12 @@
 package model;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Objects;
+import java.util.StringJoiner;
 
 public class Account implements Serializable, Comparable<Account> {
-    private final UUID uuid;
     private final HashSet<Account> subscribers;
     private final Name name;
     private final String userName;
@@ -13,17 +15,12 @@ public class Account implements Serializable, Comparable<Account> {
     private LinkedList<Post> posts;
 
     public Account(Name name, String userName, String email, String password) {
-        this.uuid = UUID.randomUUID();
         this.name = name;
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.posts = new LinkedList<>();
         this.subscribers = new HashSet<>();
-    }
-
-    public UUID getUuid() {
-        return uuid;
     }
 
     public Name getName() {
@@ -56,7 +53,7 @@ public class Account implements Serializable, Comparable<Account> {
 
     @Override
     public int compareTo(Account other) {
-        return this.uuid.compareTo(other.getUuid());
+        return this.userName.compareTo(other.getUserName());
     }
 
     @Override
@@ -65,7 +62,6 @@ public class Account implements Serializable, Comparable<Account> {
                 .add("name=" + name)
                 .add("userName='" + userName + "'")
                 .add("email='" + email + "'")
-                .add("uuid=" + uuid)
                 .toString();
     }
 
@@ -74,11 +70,11 @@ public class Account implements Serializable, Comparable<Account> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(uuid, account.uuid);
+        return Objects.equals(userName, account.userName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid);
+        return Objects.hash(userName);
     }
 }

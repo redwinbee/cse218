@@ -6,12 +6,11 @@ import model.Name;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 
 public class AccountsManager {
-    private final Map<UUID, Account> accounts;
+    private final Map<String, Account> accounts;
 
-    public AccountsManager(Map<UUID, Account> accounts) {
+    public AccountsManager(Map<String, Account> accounts) {
         this.accounts = accounts;
     }
 
@@ -21,7 +20,7 @@ public class AccountsManager {
                 .findAny();
     }
 
-    public Map<UUID, Account> all() {
+    public Map<String, Account> all() {
         return accounts;
     }
 
@@ -41,7 +40,7 @@ public class AccountsManager {
     }
 
     public void add(Account account) {
-        accounts.put(account.getUuid(), account);
+        accounts.put(account.getUserName(), account);
     }
 
     public int size() {
