@@ -15,6 +15,7 @@ public class AccountsManager {
     }
 
     public Optional<Account> verifyCredentials(String userName, String password) {
+        ;
         return accounts.values().stream()
                 .filter(acc -> acc.getUserName().equals(userName) && acc.getPassword().equals(password))
                 .findAny();
@@ -24,13 +25,12 @@ public class AccountsManager {
         return accounts;
     }
 
-    public boolean exists(String userName, String email) {
-        return accounts.values().stream().anyMatch(acc ->
-                acc.getUserName().equals(userName) || acc.getEmail().equals(email));
+    public boolean exists(String userName) {
+        return accounts.containsKey(userName);
     }
 
     public Optional<Account> create(Name name, String userName, String email, String password) {
-        if (exists(userName, email)) {
+        if (exists(userName)) {
             return Optional.empty();
         } else {
             Account account = new Account(name, userName, email, password);

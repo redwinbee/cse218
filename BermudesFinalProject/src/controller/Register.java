@@ -46,7 +46,7 @@ public class Register implements Initializable {
                 .dependsOn("email", emailField.textProperty())
                 .dependsOn("password", passwordField.textProperty())
                 .withMethod(c -> {
-                    if (App.getAccountsManager().exists(userNameField.getText(), emailField.getText())) {
+                    if (App.getAccountsManager().exists(userNameField.getText())) {
                         c.error("Username/email already in use");
                         registerButton.setDisable(true);
                     } else {
