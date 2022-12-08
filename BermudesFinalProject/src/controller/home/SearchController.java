@@ -52,12 +52,8 @@ public class SearchController implements Initializable {
             FXMLLoader loader = new FXMLLoader(ViewFinder.get("search_result"));
             AnchorPane pane = loader.load();
             SearchResultController controller = loader.getController();
-            if (Home.getContext().getSubscribers().contains(account)) {
-                controller.showUnsubscribe();
-            }
             controller.updateAccount(account);
-            controller.updateAccountName(account.getName());
-            controller.updateAccountUserName('@' + account.getUserName());
+
             return Optional.of(pane);
         } catch (IOException ex) {
             ex.printStackTrace();

@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import model.Account;
-import model.Name;
 
 public class SearchResultController {
     @FXML
@@ -30,15 +29,12 @@ public class SearchResultController {
     }
 
     public void updateAccount(Account account) {
-        this.account = account;
-    }
+        this.accountName.setText(account.getName().toString());
+        this.accountUserName.setText('@' + account.getUserName());
 
-    public void updateAccountName(Name name) {
-        this.accountName.setText(name.toString());
-    }
-
-    public void updateAccountUserName(String userName) {
-        this.accountUserName.setText(userName);
+        if (Home.getContext().getSubscribers().contains(account)) {
+            showUnsubscribe();
+        }
     }
 
     public void showSubscribe() {
