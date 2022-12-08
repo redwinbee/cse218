@@ -64,8 +64,10 @@ public class SearchController implements Initializable {
 
     private void clearResultsBox() {
         // scuffed... but it works
-        Node keep = resultsBox.getChildren().get(0);
-        resultsBox.getChildren().clear();
-        resultsBox.getChildren().add(keep);
+        if (resultsBox.getChildren().size() > 0) {
+            Node keep = resultsBox.getChildren().get(0);
+            resultsBox.getChildren().clear();
+            resultsBox.getChildren().add(keep);
+        }
     }
 }
