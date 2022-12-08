@@ -1,6 +1,5 @@
 package controller.home;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -23,8 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Home implements Initializable {
     private static Account context;
@@ -34,8 +30,6 @@ public class Home implements Initializable {
     public MenuItem homeMenu;
     @FXML
     public MenuItem searchMenu;
-    @FXML
-    public ScrollPane scrollPane;
     @FXML
     private TextArea postTextArea;
     @FXML
@@ -125,37 +119,26 @@ public class Home implements Initializable {
     }
 
     private void initializePosts() {
-        try (ExecutorService threadPool = Executors.newFixedThreadPool(10)) {
-            context.getSubscribers().forEach(acc -> threadPool.submit(() -> {
-                for (Post post : acc.getPosts()) {
-                    try {
-                        FXMLLoader loader = new FXMLLoader(ViewFinder.get("post"));
-                        AnchorPane postPane = loader.load();
-                        PostController controller = loader.getController();
-                        controller.updateFullName(post.getAuthor().getName().toString());
-                        controller.updateUserName(post.getAuthor().getUserName());
-                        controller.updateBody(post.getBody());
-                        controller.updatePostTime(post.getTimePosted());
-                        if (post.getAttachment() != null) {
-                            controller.updateFile(post.getAttachment());
-                        }
-
-                        // we have to go back to the UI thread to update the view
-                        Platform.runLater(() -> {
-                            postsBox.getChildren().add(0, postPane);
-                            scrollPane.setVvalue(0);
-                        });
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
+        context.getSubscribers().forEach(acc -> {
+            for (Post post : acc.getPosts()) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(ViewFinder.get("post"));
+                    AnchorPane postPane = loader.load();
+                    PostController controller = loader.getController();
+                    controller.updateFullName(post.getAuthor().getName().toString());
+                    controller.updateUserName(post.getAuthor().getUserName());
+                    controller.updateBody(post.getBody());
+                    controller.updatePostTime(post.getTimePosted());
+                    if (post.getAttachment() != null) {
+                        controller.updateFile(post.getAttachment());
                     }
+                    postsBox.getChildren().add(0, postPane);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
-            }));
-
-            // shut it down, chief
-            threadPool.shutdown();
-        }
+            }
+        });
     }
-
 
     private Post createPost(String postBody) {
         return new Post(context, LocalDateTime.now(), postBody);

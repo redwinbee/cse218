@@ -10,7 +10,7 @@
             fx:controller="controller.home.Home">
     <center>
         <ScrollPane hbarPolicy="NEVER" prefHeight="314.0" prefWidth="531.0" vbarPolicy="NEVER"
-                    BorderPane.alignment="CENTER" fx:id="scrollPane">
+                    BorderPane.alignment="CENTER">
             <VBox fx:id="postsBox"/>
         </ScrollPane>
     </center>
