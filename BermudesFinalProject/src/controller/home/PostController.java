@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import util.ViewFinder;
+import util.ViewFinder.ViewKey;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,6 +56,6 @@ public class PostController {
     }
 
     public void openPost() {
-        App.changeView(ViewFinder.get("post_comment"));
+        App.changeView(ViewFinder.get(ViewKey.POST_COMMENT));
     }
 }

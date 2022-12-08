@@ -3,25 +3,32 @@ package util;
 import app.App;
 
 import java.net.URL;
-import java.util.HashMap;
 
 public class ViewFinder {
-    private static final HashMap<String, String> views = new HashMap<>();
-
-    static {
-        views.put("login", "../fxml/login.fxml");
-        views.put("register", "../fxml/register.fxml");
-        views.put("home", "../fxml/home/home.fxml");
-        views.put("post", "../fxml/home/post.fxml");
-        views.put("post_comment", "../fxml/home/post_comment.fxml");
-        views.put("search", "../fxml/home/search.fxml");
-        views.put("search_result", "../fxml/home/search_result.fxml");
-    }
-
     private ViewFinder() {
     }
 
-    public static URL get(String key) {
-        return App.class.getResource(views.get(key));
+    public static URL get(ViewKey key) {
+        return App.class.getResource(key.getPath());
+    }
+
+    public enum ViewKey {
+        LOGIN("../fxml/login.fxml"),
+        REGISTER("../fxml/register.fxml"),
+        HOME("../fxml/home/home.fxml"),
+        POST("../fxml/home/post.fxml"),
+        POST_COMMENT("../fxml/home/post_comment.fxml"),
+        SEARCH("../fxml/home/search.fxml"),
+        SEARCH_RESULT("../fxml/home/search_result.fxml");
+
+        private final String path;
+
+        ViewKey(String path) {
+            this.path = path;
+        }
+
+        public String getPath() {
+            return path;
+        }
     }
 }

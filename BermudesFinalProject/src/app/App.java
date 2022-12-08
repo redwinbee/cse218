@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import persistence.AccountsManager;
 import persistence.Storage;
 import util.ViewFinder;
+import util.ViewFinder.ViewKey;
 
 import java.io.IOException;
 import java.net.URL;
@@ -53,7 +54,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(ViewFinder.get("login"));
+        Parent root = FXMLLoader.load(ViewFinder.get(ViewKey.LOGIN));
         stage.setOnCloseRequest(event -> Storage.backup(accountsManager));
         stage.setTitle("BermudesFinalProject");
         stage.setScene(new Scene(root));

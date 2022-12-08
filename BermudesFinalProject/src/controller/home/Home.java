@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 import model.Account;
 import model.Post;
 import util.ViewFinder;
+import util.ViewFinder.ViewKey;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,7 +63,7 @@ public class Home implements Initializable {
         Post post = (this.selectedFile != null) ? createPostWithAttach(body, selectedFile) : createPost(body);
         context.getPosts().add(post);
         try {
-            FXMLLoader loader = new FXMLLoader(ViewFinder.get("post"));
+            FXMLLoader loader = new FXMLLoader(ViewFinder.get(ViewKey.POST_COMMENT));
             AnchorPane postPane = loader.load();
             PostController controller = loader.getController();
             controller.updateFullName(context.getName().toString());
@@ -94,7 +95,7 @@ public class Home implements Initializable {
     public void onSearchMenu() {
         try {
             this.prevCenter = borderPane.getCenter();
-            borderPane.setCenter(new FXMLLoader(ViewFinder.get("search")).load());
+            borderPane.setCenter(new FXMLLoader(ViewFinder.get(ViewKey.SEARCH)).load());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -122,7 +123,7 @@ public class Home implements Initializable {
         context.getSubscriptions().forEach(acc -> {
             for (Post post : acc.getPosts()) {
                 try {
-                    FXMLLoader loader = new FXMLLoader(ViewFinder.get("post"));
+                    FXMLLoader loader = new FXMLLoader(ViewFinder.get(ViewKey.POST));
                     AnchorPane postPane = loader.load();
                     PostController controller = loader.getController();
                     controller.updateFullName(post.getAuthor().getName().toString());

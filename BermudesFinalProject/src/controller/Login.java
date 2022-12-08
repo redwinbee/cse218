@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import persistence.Generator;
 import util.ViewFinder;
+import util.ViewFinder.ViewKey;
 
 public class Login {
     public Button reconstruct;
@@ -38,7 +39,7 @@ public class Login {
                 .verifyCredentials(userNameField.getText(), passwordField.getText())
                 .ifPresentOrElse(acc -> {
                     Home.setContext(acc);
-                    App.changeView(ViewFinder.get("home"));
+                    App.changeView(ViewFinder.get(ViewKey.HOME));
                 }, () -> {
                     statusLabel.setTextFill(Color.RED);
                     statusLabel.setText("Invalid username/password!");
@@ -47,6 +48,6 @@ public class Login {
 
     @FXML
     public void handleRegister() {
-        App.changeView(ViewFinder.get("register"));
+        App.changeView(ViewFinder.get(ViewKey.REGISTER));
     }
 }

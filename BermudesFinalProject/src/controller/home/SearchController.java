@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import model.Account;
 import util.ViewFinder;
+import util.ViewFinder.ViewKey;
 
 import java.io.IOException;
 import java.net.URL;
@@ -49,7 +50,7 @@ public class SearchController implements Initializable {
 
     private Optional<Node> loadAccountResult(Account account) {
         try {
-            FXMLLoader loader = new FXMLLoader(ViewFinder.get("search_result"));
+            FXMLLoader loader = new FXMLLoader(ViewFinder.get(ViewKey.SEARCH_RESULT));
             AnchorPane pane = loader.load();
             SearchResultController controller = loader.getController();
             if (Home.getContext().getSubscriptions().contains(account)) {

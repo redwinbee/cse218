@@ -12,6 +12,7 @@ import model.Account;
 import model.Name;
 import net.synedra.validatorfx.Validator;
 import util.ViewFinder;
+import util.ViewFinder.ViewKey;
 
 import java.net.URL;
 import java.util.Optional;
@@ -90,7 +91,7 @@ public class Register implements Initializable {
 
     @FXML
     public void handleBack() {
-        App.changeView(ViewFinder.get("login"));
+        App.changeView(ViewFinder.get(ViewKey.LOGIN));
     }
 
     private boolean fieldsEmpty() {
