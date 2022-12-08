@@ -19,13 +19,13 @@ public class SearchResultController {
 
     @FXML
     public void onSubscribe() {
-        Home.getContext().getSubscribers().add(account);
+        Home.getContext().getSubscriptions().add(account);
         showUnsubscribe();
     }
 
     @FXML
     public void onUnsubscribe() {
-        Home.getContext().getSubscribers().remove(account);
+        Home.getContext().getSubscriptions().remove(account);
         showSubscribe();
     }
 

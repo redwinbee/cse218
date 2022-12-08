@@ -119,7 +119,7 @@ public class Home implements Initializable {
     }
 
     private void initializePosts() {
-        context.getSubscribers().forEach(acc -> {
+        context.getSubscriptions().forEach(acc -> {
             for (Post post : acc.getPosts()) {
                 try {
                     FXMLLoader loader = new FXMLLoader(ViewFinder.get("post"));

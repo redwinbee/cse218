@@ -1,13 +1,13 @@
 package model;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.StringJoiner;
+import java.util.TreeSet;
 
 public class Account implements Serializable, Comparable<Account> {
-    private final HashSet<Account> subscribers;
+    private final TreeSet<Account> subscriptions;
     private final Name name;
     private final String userName;
     private final String email;
@@ -20,7 +20,7 @@ public class Account implements Serializable, Comparable<Account> {
         this.email = email;
         this.password = password;
         this.posts = new LinkedList<>();
-        this.subscribers = new HashSet<>();
+        this.subscriptions = new TreeSet<>();
     }
 
     public Name getName() {
@@ -47,8 +47,8 @@ public class Account implements Serializable, Comparable<Account> {
         this.posts = randomPosts;
     }
 
-    public HashSet<Account> getSubscribers() {
-        return subscribers;
+    public TreeSet<Account> getSubscriptions() {
+        return subscriptions;
     }
 
     @Override
