@@ -1,10 +1,12 @@
 package controller.home;
 
+import app.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import util.ViewFinder;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -53,6 +55,6 @@ public class PostController {
     }
 
     public void openPost() {
-        System.out.println("clicked!");
+        App.changeView(ViewFinder.get("post_comment"));
     }
 }

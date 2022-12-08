@@ -40,9 +40,12 @@ public class Home implements Initializable {
     private Button removeAttachButton;
     @FXML
     private VBox postsBox;
-
     private File selectedFile;
     private Node prevCenter;
+
+    public static Account getContext() {
+        return context;
+    }
 
     public static void setContext(Account context) {
         Home.context = context;
@@ -92,7 +95,6 @@ public class Home implements Initializable {
         try {
             this.prevCenter = borderPane.getCenter();
             borderPane.setCenter(new FXMLLoader(ViewFinder.get("search")).load());
-            SearchController.setContext(context);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

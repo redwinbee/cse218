@@ -19,18 +19,12 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 public class SearchController implements Initializable {
-    private static Account context;
     @FXML
     private VBox resultsBox;
     @FXML
     private TextField searchField;
     @FXML
     private Button findButton;
-
-    public static void setContext(Account context) {
-        SearchController.context = context;
-        SearchResultController.setContext(context);
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,7 +52,7 @@ public class SearchController implements Initializable {
             FXMLLoader loader = new FXMLLoader(ViewFinder.get("search_result"));
             AnchorPane pane = loader.load();
             SearchResultController controller = loader.getController();
-            if (context.getSubscribers().contains(account)) {
+            if (Home.getContext().getSubscribers().contains(account)) {
                 controller.showUnsubscribe();
             }
             controller.updateAccount(account);

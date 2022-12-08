@@ -7,7 +7,6 @@ import model.Account;
 import model.Name;
 
 public class SearchResultController {
-    private static Account context;
     @FXML
     public Button subscribe;
     @FXML
@@ -18,19 +17,15 @@ public class SearchResultController {
     public Text accountUserName;
     private Account account;
 
-    public static void setContext(Account context) {
-        SearchResultController.context = context;
-    }
-
     @FXML
     public void onSubscribe() {
-        context.getSubscribers().add(account);
+        Home.getContext().getSubscribers().add(account);
         showUnsubscribe();
     }
 
     @FXML
     public void onUnsubscribe() {
-        context.getSubscribers().remove(account);
+        Home.getContext().getSubscribers().remove(account);
         showSubscribe();
     }
 
