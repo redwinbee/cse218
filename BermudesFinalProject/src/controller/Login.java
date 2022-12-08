@@ -26,7 +26,7 @@ public class Login {
 
     public void onReconstruct() {
         System.out.println("[info]: reconstructing accounts manager with random values...");
-        App.setAccountsManager(Generator.generate(App.NUM_RANDOM_ACCOUNTS));
+        App.setAccountsManager(Generator.generate(App.MAX_ACCOUNTS));
         statusLabel.setTextFill(Color.RED);
         statusLabel.setText("Reconstructed with " + App.getAccountsManager().size() + " accounts");
         reconstruct.setDisable(true);

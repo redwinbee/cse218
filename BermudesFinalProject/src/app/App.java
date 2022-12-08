@@ -18,7 +18,7 @@ public class App extends Application {
     /**
      * The number of accounts that should be created when reconstructing a random AccountsManager
      **/
-    public static final int NUM_RANDOM_ACCOUNTS = 1_000;
+    public static final int MAX_ACCOUNTS = 1_000;
     private static Stage primaryStage;
     private static AccountsManager accountsManager;
 
