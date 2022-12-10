@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import model.Post;
 import util.ViewFinder;
 import util.ViewFinder.ViewKey;
 
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class PostController {
+    private Post post;
     @FXML
     private Label fullName;
     @FXML
@@ -26,6 +28,17 @@ public class PostController {
     private Label postTime;
     @FXML
     private ImageView imageView;
+
+    public void setPost(Post post) {
+        this.post = post;
+        updateFullName(post.getAuthor().getName().toString());
+        updateUserName(post.getAuthor().getUserName());
+        updateBody(post.getBody());
+        updatePostTime(post.getTimePosted());
+        if (post.getAttachment() != null) {
+            updateFile(post.getAttachment());
+        }
+    }
 
     public void updateFullName(String name) {
         this.fullName.setText(name);

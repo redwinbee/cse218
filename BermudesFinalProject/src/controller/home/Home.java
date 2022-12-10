@@ -63,13 +63,10 @@ public class Home implements Initializable {
         Post post = (this.selectedFile != null) ? createPostWithAttach(body, selectedFile) : createPost(body);
         context.getPosts().add(post);
         try {
-            FXMLLoader loader = new FXMLLoader(ViewFinder.get(ViewKey.POST_COMMENT));
+            FXMLLoader loader = new FXMLLoader(ViewFinder.get(ViewKey.POST));
             AnchorPane postPane = loader.load();
             PostController controller = loader.getController();
-            controller.updateFullName(context.getName().toString());
-            controller.updateUserName(context.getUserName());
-            controller.updateBody(postTextArea.getText());
-            controller.updatePostTime(post.getTimePosted());
+            controller.setPost(post);
             if (selectedFile != null) {
                 controller.updateFile(selectedFile);
                 this.selectedFile = null;
@@ -126,13 +123,7 @@ public class Home implements Initializable {
                     FXMLLoader loader = new FXMLLoader(ViewFinder.get(ViewKey.POST));
                     AnchorPane postPane = loader.load();
                     PostController controller = loader.getController();
-                    controller.updateFullName(post.getAuthor().getName().toString());
-                    controller.updateUserName(post.getAuthor().getUserName());
-                    controller.updateBody(post.getBody());
-                    controller.updatePostTime(post.getTimePosted());
-                    if (post.getAttachment() != null) {
-                        controller.updateFile(post.getAttachment());
-                    }
+                    controller.setPost(post);
                     postsBox.getChildren().add(0, postPane);
                 } catch (IOException ex) {
                     ex.printStackTrace();
