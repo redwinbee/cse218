@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.Post;
-import model.PostComment;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,23 +31,17 @@ public class PostCommentController {
     private Label postTime;
 
     public void initData() {
-        for (int i = 0; i < post.getComments().size(); i++) {
-            PostComment comment = post.getComments().poll();
+        post.getComments().forEach(comment -> {
+            VBox container = new VBox();
+            HBox commenterBox = new HBox();
+            Label fullName = new Label(comment.getAuthor().getName().toString());
+            Label userName = new Label('@' + comment.getAuthor().getUserName());
+            Text body = new Text(comment.getBody());
+            commenterBox.getChildren().addAll(fullName, userName);
 
-            if (comment != null) {
-                VBox container = new VBox();
-                HBox commenterBox = new HBox();
-                Label fullName = new Label(comment.getAuthor().getName().toString());
-                Label userName = new Label('@' + comment.getAuthor().getUserName());
-                Text body = new Text(comment.getBody());
-                commenterBox.getChildren().addAll(fullName, userName);
-
-                container.getChildren().addAll(commenterBox, body);
-                postComments.getChildren().add(container);
-
-                post.addComment(Home.getContext(), commentField.getText());
-            }
-        }
+            container.getChildren().addAll(commenterBox, body);
+            postComments.getChildren().add(container);
+        });
     }
 
     public void setPost(Post post) {
