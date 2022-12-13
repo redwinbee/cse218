@@ -2,9 +2,11 @@ package controller.home;
 
 import app.App;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import model.Post;
 import util.ViewFinder;
@@ -13,6 +15,7 @@ import util.ViewFinder.ViewKey;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -69,6 +72,14 @@ public class PostController {
     }
 
     public void openPost() {
-        App.changeView(ViewFinder.get(ViewKey.POST_COMMENT));
+        try {
+            FXMLLoader loader = new FXMLLoader(ViewFinder.get(ViewKey.POST_COMMENT));
+            AnchorPane pane = loader.load();
+            PostCommentController controller = loader.getController();
+            controller.setPost(post);
+            App.getPrimaryStage().getScene().setRoot(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

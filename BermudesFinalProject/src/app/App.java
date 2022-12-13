@@ -2,6 +2,7 @@ package app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -44,6 +45,10 @@ public class App extends Application {
     public static void setAccountsManager(AccountsManager accountsManager) {
         App.accountsManager = accountsManager;
         Storage.backup(accountsManager);
+    }
+
+    public static Node getPrimaryStage() {
+        return primaryStage.getScene().getRoot();
     }
 
     @Override

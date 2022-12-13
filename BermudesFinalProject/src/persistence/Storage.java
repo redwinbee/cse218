@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Storage {
-    public static final File ACCOUNTS_FILE = new File("data/accounts.dat");
+    public static final File ACCOUNTS_FILE = new File("data/accounts.ser");
 
     public static void backup(AccountsManager accountsManager) {
         Map<String, Account> accounts = accountsManager.all();
