@@ -34,9 +34,9 @@ public class PostCommentController {
         post.getComments().forEach(comment -> {
             VBox container = new VBox();
             HBox commenterBox = new HBox();
-            Label fullName = new Label(comment.getAuthor().getName().toString());
-            Label userName = new Label('@' + comment.getAuthor().getUserName());
-            Text body = new Text(comment.getBody());
+            Label fullName = new Label(comment.author().getName().toString());
+            Label userName = new Label('@' + comment.author().getUserName());
+            Text body = new Text(comment.body());
             commenterBox.getChildren().addAll(fullName, userName);
 
             container.getChildren().addAll(commenterBox, body);
