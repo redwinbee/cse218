@@ -15,7 +15,6 @@ public class AccountsManager {
     }
 
     public Optional<Account> verifyCredentials(String userName, String password) {
-        ;
         return accounts.values().stream()
                 .filter(acc -> acc.getUserName().equals(userName) && acc.getPassword().equals(password))
                 .findAny();
