@@ -1,0 +1,92 @@
+--------------------------------------------------------------
+Edwin Bermudes
+Final Project
+Fall 2022
+CSE218
+--------------------------------------------------------------
+
+--------------------------------------------------------------
+The overall design of the application is loosely based on MVC where the models, views, and controllers are defined in
+the respective packages:
+
+    Model: Classes that represent the different objects that will be used during application runtime
+
+    Controller: Classes that define the behaviour of the different pages in the application
+
+    View: FXML files stored in the 'view' package that define the layout of the different elements and pages
+        in the application.
+
+--------------------------------------------------------------
+
+Overview of the different Models in the application:
+
+    Account:
+        - Defines what an account in the application needs to have--that is a name, username, email, password,
+            subscriptions, and posts
+
+            * The subscriptions is defined as a TreeSet<Account> as it is unknown how many subscriptions an particular
+            account might have. The TreeSet ensures that we will always be guaranteed log(n) time complexity for any
+            basic operation on this set.
+
+            * The posts is defined as a LinkedList<Post> which is a better alternative to using an ArrayList<Post> as
+            it is also unknown how many posts a particular account might have. A TreeSet<Post> can technically be used
+            here too, however we don't actually care about the performance of the basic operations to manipulate the
+            List and only want a means of storing an unknown number of posts without the overhead of resizing a backing
+            array.
+    Post:
+        - Defines what a post for this application must have which is an author, time posted, comments, the body, and
+        optionally a file attachment.
+
+            * The comments are also a LinkedList<PostComment> which is used for the same reason we used one for the
+            posts in a given account. The only operations performed in either case is reading the values in the lists
+            sequentially to populate the application with data.
+
+Overview of the Persistence "Module":
+
+    AccountManager:
+
+        - Defines what is possible with a given Map of accounts, this class handles adding, removing, checking if an
+        account exists, and verifying the credentials during login.
+
+            * The main data structure used in this class is the Map<String, Account> which defines that we could use
+            any Map<K, V> implementation to store the accounts in the application. When this class is initialized by
+            either a `Storage.restore()` or by a fresh run of the application that creates a new AccountManager, it
+            always initializes it specifically with a TreeMap<String, Account>.
+
+                * There are a few reasons for this specific implementation of Map<K, V>:
+
+                    1) We are guaranteed a means of storing an unknown number of accounts without needing to worry
+                    about the overhead of potentially resizing a backing array in an ArrayList<Account> hundreds or even
+                    thousands of times over the lifespan of the application.
+
+                    2) The TreeMap, since it is based on a Red-Black self-balancing tree, will guarantee that the basic
+                    operations (add, remove, contains) will have a log(n) time complexity. This is especially important
+                    in the case of `contains()` as, whenever an account is created, a check is performed to determine if
+                    an account is already defined in the Map.
+
+Overview of the Storage "Module":
+
+    Storage:
+
+        - Handles the serialization/deserialization of an AccountManager to persist all the data for the next time the
+        application is run. The TreeMap<String, Account> is actually what is being written to disk and that data is then
+        read and used to create an AccountManager for the application during restoration.
+
+        - This class also contains the dictionary, HashSet<String>, which is used for spellchecking in the posting text
+        area on the home screen. The main reason for the use of a HashSet here is that:
+
+            1) Since the dictionary is already provided as a "complete" list of words in the 'dictionary.txt' file, we
+            can confidently create the HashSet with a specific number of elements (the number of words in the dictionary)
+            which avoids constant array resizing which is what the backing hash table is based on.
+
+            2) Since the backing array will never need to be resized, so long as the implementation of the hash table is
+            evenly spreading the values between all the buckets, we are almost always guaranteed constant time performance
+            for all the basic operations. This is especially important for 'contains()' since this method is called EVERY
+            time the user types in the text area to check for typos.
+
+Overview of the Generator "Module":
+
+    - This class simply generates a bunch of accounts with the random data provided in the 'import' folder for testing
+    purposes. It also creates a basic account with the name "John Doe" which we can log in and test with.
+
+--------------------------------------------------------------

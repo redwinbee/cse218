@@ -3,27 +3,27 @@ package model;
 import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.StringJoiner;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Post implements Serializable {
     private final Account author;
-    private final ConcurrentLinkedQueue<PostComment> comments;
+    private final LinkedList<PostComment> comments;
     private final LocalDateTime timePosted;
     private final String body;
     private File attachment;
 
     public Post(Account author, LocalDateTime timePosted, String body) {
         this.author = author;
-        this.comments = new ConcurrentLinkedQueue<>();
+        this.comments = new LinkedList<>();
         this.timePosted = timePosted;
         this.body = body;
     }
 
     public Post(Account author, LocalDateTime timePosted, String body, File attachment) {
         this.author = author;
-        this.comments = new ConcurrentLinkedQueue<>();
+        this.comments = new LinkedList<>();
         this.timePosted = timePosted;
         this.body = body;
         this.attachment = attachment;
@@ -45,7 +45,7 @@ public class Post implements Serializable {
         return attachment;
     }
 
-    public ConcurrentLinkedQueue<PostComment> getComments() {
+    public LinkedList<PostComment> getComments() {
         return comments;
     }
 
