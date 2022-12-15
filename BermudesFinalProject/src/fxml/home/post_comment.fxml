@@ -44,6 +44,11 @@
                                 <Font name="Rockwell" size="12.0"/>
                             </font>
                         </Button>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBack" text="Back">
+                            <font>
+                                <Font name="Rockwell" size="12.0"/>
+                            </font>
+                        </Button>
                     </children>
                 </HBox>
                 <ScrollPane>

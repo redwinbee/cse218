@@ -1,5 +1,6 @@
 package controller.home;
 
+import app.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,6 +11,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import model.Account;
 import model.Post;
+import util.ViewFinder;
+import util.ViewFinder.ViewKey;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,6 +24,7 @@ public class PostCommentController {
     public Button comment;
     @FXML
     public VBox postComments;
+    public Button backButton;
     private Post post;
     @FXML
     private Label fullName;
@@ -33,6 +37,11 @@ public class PostCommentController {
 
     public void initData() {
         post.getComments().forEach(comment -> createComment(comment.author(), comment.body(), false));
+    }
+
+    @FXML
+    public void onBack() {
+        App.changeView(ViewFinder.get(ViewKey.HOME));
     }
 
     public void setPost(Post post) {
