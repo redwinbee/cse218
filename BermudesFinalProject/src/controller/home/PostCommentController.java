@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -14,6 +16,9 @@ import model.Post;
 import util.ViewFinder;
 import util.ViewFinder.ViewKey;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -24,7 +29,10 @@ public class PostCommentController {
     public Button comment;
     @FXML
     public VBox postComments;
+    @FXML
     public Button backButton;
+    @FXML
+    public ImageView imageView;
     private Post post;
     @FXML
     private Label fullName;
@@ -49,8 +57,23 @@ public class PostCommentController {
         updateFullName(post.getAuthor().getName().toString());
         updateUserName(post.getAuthor().getUserName());
         updateBody(post.getBody());
+        if (post.getAttachment() != null) {
+            updateFile(post.getAttachment());
+        }
         updatePostTime(post.getTimePosted());
         initData();
+    }
+
+    public void updateFile(File file) {
+        try {
+            FileInputStream stream = new FileInputStream(file.getPath());
+            this.imageView.setImage(new Image(stream));
+            this.imageView.setFitHeight(299); // arbitrary values, just need it to fit the screen
+            this.imageView.setFitWidth(133);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     public void updateFullName(String name) {

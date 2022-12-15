@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19"
@@ -27,6 +28,8 @@
                         <Font name="Rockwell" size="13.0"/>
                     </font>
                 </Text>
+                <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
+                           preserveRatio="true"/>
                 <Label fx:id="postTime" text="Label">
                     <font>
                         <Font size="12.0"/>
