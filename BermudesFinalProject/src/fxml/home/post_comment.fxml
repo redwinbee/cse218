@@ -27,7 +27,11 @@
                         <Font name="Rockwell" size="13.0"/>
                     </font>
                 </Text>
-                <Label fx:id="postTime" text="Label"/>
+                <Label fx:id="postTime" text="Label">
+                    <font>
+                        <Font size="12.0"/>
+                    </font>
+                </Label>
                 <HBox spacing="10.0">
                     <children>
                         <TextField fx:id="commentField" promptText="Comment something">

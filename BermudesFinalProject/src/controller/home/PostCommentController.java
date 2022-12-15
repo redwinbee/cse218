@@ -1,6 +1,5 @@
 package controller.home;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import model.Account;
 import model.Post;
 
 import java.time.LocalDateTime;
@@ -31,17 +31,7 @@ public class PostCommentController {
     private Label postTime;
 
     public void initData() {
-        post.getComments().forEach(comment -> {
-            VBox container = new VBox();
-            HBox commenterBox = new HBox();
-            Label fullName = new Label(comment.author().getName().toString());
-            Label userName = new Label('@' + comment.author().getUserName());
-            Text body = new Text(comment.body());
-            commenterBox.getChildren().addAll(fullName, userName);
-
-            container.getChildren().addAll(commenterBox, body);
-            postComments.getChildren().add(container);
-        });
+        post.getComments().forEach(comment -> createComment(comment.author(), comment.body(), false));
     }
 
     public void setPost(Post post) {
@@ -69,18 +59,24 @@ public class PostCommentController {
         this.postTime.setText(time.format(DateTimeFormatter.ofPattern("E, MMM dd yyyy HH:mm")));
     }
 
-    public void onComment(ActionEvent actionEvent) {
+    public void onComment() {
+        createComment(Home.getContext(), commentField.getText(), true);
+    }
+
+    private void createComment(Account context, String body, boolean addToBox) {
         VBox container = new VBox();
 
         HBox commenterBox = new HBox();
-        Label fullName = new Label(Home.getContext().getName().toString());
-        Label userName = new Label('@' + Home.getContext().getUserName());
-        Text body = new Text(commentField.getText());
+        Label fullName = new Label(context.getName().toString());
+        Label userName = new Label('@' + context.getUserName());
+        Text text = new Text(body);
         commenterBox.getChildren().addAll(fullName, userName);
 
-        container.getChildren().addAll(commenterBox, body);
+        container.getChildren().addAll(commenterBox, text);
         postComments.getChildren().add(container);
 
-        post.addComment(Home.getContext(), commentField.getText());
+        if (addToBox) {
+            post.addComment(context, commentField.getText());
+        }
     }
 }
