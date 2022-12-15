@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import model.Account;
 import model.Post;
@@ -65,11 +66,16 @@ public class PostCommentController {
 
     private void createComment(Account context, String body, boolean addToBox) {
         VBox container = new VBox();
+        container.setSpacing(10);
 
         HBox commenterBox = new HBox();
+        commenterBox.setSpacing(10);
         Label fullName = new Label(context.getName().toString());
+        fullName.setFont(Font.font("Rockwell", 12.0));
         Label userName = new Label('@' + context.getUserName());
+        userName.setFont(Font.font("Rockwell", 12.0));
         Text text = new Text(body);
+        text.setFont(Font.font("Rockwell", 12.0));
         commenterBox.getChildren().addAll(fullName, userName);
 
         container.getChildren().addAll(commenterBox, text);
