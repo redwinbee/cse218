@@ -11,9 +11,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import model.Account;
 import model.Post;
+import persistence.Storage;
 import util.ViewFinder;
 import util.ViewFinder.ViewKey;
 
@@ -21,7 +23,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class Home implements Initializable {
     private static Account context;
@@ -33,6 +38,8 @@ public class Home implements Initializable {
     public MenuItem searchMenu;
     @FXML
     private TextArea postTextArea;
+    @FXML
+    private Text typoText;
     @FXML
     private Button postButton;
     @FXML
@@ -55,6 +62,7 @@ public class Home implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializePosts();
+        initializeSpellchecker();
     }
 
     @FXML
@@ -128,6 +136,27 @@ public class Home implements Initializable {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+            }
+        });
+    }
+
+    private void initializeSpellchecker() {
+        postTextArea.setOnKeyTyped(event -> {
+            if (event.getCharacter().equals(" ")) {
+                LinkedList<String> words = Arrays.stream(postTextArea.getText().split("\\s+"))
+                        .map(String::toLowerCase)
+                        .collect(Collectors.toCollection(LinkedList::new));
+                String typo;
+                for (String word : words) {
+                    if (!Storage.DICTIONARY.contains(word)) {
+                        typo = word;
+                        typoText.setText("Typo in word: " + typo);
+                        typoText.setVisible(true);
+                    } else {
+                        typoText.setVisible(false);
+                    }
+                }
+
             }
         });
     }

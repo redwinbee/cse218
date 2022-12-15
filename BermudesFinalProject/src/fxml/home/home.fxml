@@ -3,9 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="373.0"
+<?import javafx.scene.text.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0"
             prefWidth="613.0" xmlns="http://javafx.com/javafx/19"
             fx:controller="controller.home.Home">
     <center>
@@ -19,39 +18,43 @@
             <MenuBar useSystemMenuBar="true">
                 <Menu mnemonicParsing="false" text="File">
                     <MenuItem fx:id="homeMenu" mnemonicParsing="false" onAction="#onHomeMenu" text="Home"/>
-                    <MenuItem fx:id="searchMenu" mnemonicParsing="false" onAction="#onSearchMenu"
-                              text="Search"/>
+                    <MenuItem fx:id="searchMenu" mnemonicParsing="false" onAction="#onSearchMenu" text="Search"/>
                 </Menu>
             </MenuBar>
-            <HBox alignment="CENTER" spacing="10.0">
-                <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                </padding>
-                <TextArea fx:id="postTextArea" prefHeight="40.0" prefWidth="374.0"
-                          promptText="Got something to say?" stylesheets="@../hide_scrollbar.css"
-                          wrapText="true">
-                    <font>
-                        <Font name="Rockwell" size="13.0"/>
-                    </font>
-                </TextArea>
-                <Button fx:id="postButton" defaultButton="true" mnemonicParsing="false" onAction="#onPost"
-                        prefHeight="27.0" prefWidth="57.0" text="Post">
-                    <font>
-                        <Font name="Rockwell" size="13.0"/>
-                    </font>
-                </Button>
-                <Button fx:id="attachButton" mnemonicParsing="false" onAction="#onAttach" text="Attach">
-                    <font>
-                        <Font name="Rockwell" size="13.0"/>
-                    </font>
-                </Button>
-                <Button fx:id="removeAttachButton" disable="true" mnemonicParsing="false"
-                        onAction="#onRemoveAttachment" text="Remove">
-                    <font>
-                        <Font name="Rockwell" size="13.0"/>
-                    </font>
-                </Button>
-            </HBox>
+            <VBox alignment="CENTER">
+                <children>
+                    <HBox alignment="CENTER" spacing="10.0">
+                        <padding>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                        </padding>
+                        <TextArea fx:id="postTextArea" prefHeight="40.0" prefWidth="374.0"
+                                  promptText="Got something to say?" stylesheets="@../hide_scrollbar.css"
+                                  wrapText="true">
+                            <font>
+                                <Font name="Rockwell" size="13.0"/>
+                            </font>
+                        </TextArea>
+                        <Button fx:id="postButton" defaultButton="true" mnemonicParsing="false" onAction="#onPost"
+                                prefHeight="27.0" prefWidth="57.0" text="Post">
+                            <font>
+                                <Font name="Rockwell" size="13.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="attachButton" mnemonicParsing="false" onAction="#onAttach" text="Attach">
+                            <font>
+                                <Font name="Rockwell" size="13.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="removeAttachButton" disable="true" mnemonicParsing="false"
+                                onAction="#onRemoveAttachment" text="Remove">
+                            <font>
+                                <Font name="Rockwell" size="13.0"/>
+                            </font>
+                        </Button>
+                    </HBox>
+                    <Text fx:id="typoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false"/>
+                </children>
+            </VBox>
         </VBox>
     </top>
 </BorderPane>

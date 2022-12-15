@@ -3,10 +3,20 @@ package persistence;
 import model.Account;
 
 import java.io.*;
+import java.util.HashSet;
 import java.util.Map;
 
 public class Storage {
     public static final File ACCOUNTS_FILE = new File("data/accounts.ser");
+    public static final File DICTIONARY_FILE = new File("import/dictionary.txt");
+    public static final HashSet<String> DICTIONARY = new HashSet<>(100_000);
+
+    static {
+        loadDictionary();
+    }
+
+    private Storage() {
+    }
 
     public static void backup(AccountsManager accountsManager) {
         Map<String, Account> accounts = accountsManager.all();
@@ -37,4 +47,16 @@ public class Storage {
         return null;
     }
 
+    private static void loadDictionary() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(DICTIONARY_FILE))) {
+            String curr;
+            while ((curr = reader.readLine()) != null) {
+                DICTIONARY.add(curr);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        System.out.println("[storage]: loaded dictionary");
+    }
 }
