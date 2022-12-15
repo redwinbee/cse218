@@ -23,9 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Home implements Initializable {
@@ -66,7 +64,7 @@ public class Home implements Initializable {
     }
 
     @FXML
-    private void onPost(ActionEvent event) {
+    private void onPost() {
         String body = postTextArea.getText();
         Post post = (this.selectedFile != null) ? createPostWithAttach(body, selectedFile) : createPost(body);
         context.getPosts().add(post);
@@ -125,17 +123,19 @@ public class Home implements Initializable {
     }
 
     private void initializePosts() {
-        context.getSubscriptions().forEach(acc -> {
-            for (Post post : acc.getPosts()) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(ViewFinder.get(ViewKey.POST));
-                    AnchorPane postPane = loader.load();
-                    PostController controller = loader.getController();
-                    controller.setPost(post);
-                    postsBox.getChildren().add(0, postPane);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+        List<Post> merged = new LinkedList<>(context.getPosts());
+        context.getSubscriptions().forEach(acc -> merged.addAll(acc.getPosts()));
+        merged.sort(Comparator.comparing(Post::getTimePosted));
+
+        merged.forEach(post -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(ViewFinder.get(ViewKey.POST));
+                AnchorPane postPane = loader.load();
+                PostController controller = loader.getController();
+                controller.setPost(post);
+                postsBox.getChildren().add(0, postPane);
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         });
     }
