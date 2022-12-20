@@ -1,5 +1,6 @@
 package app;
 
+import atlantafx.base.theme.NordLight;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -59,6 +60,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Application.setUserAgentStylesheet(new NordLight().getUserAgentStylesheet());
         Parent root = FXMLLoader.load(ViewFinder.get(ViewKey.LOGIN));
         stage.setOnCloseRequest(event -> Storage.backup(accountsManager));
         stage.setTitle("BermudesFinalProject");
